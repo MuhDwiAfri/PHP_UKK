@@ -72,12 +72,12 @@ include "../config.php";
                                 Pengguna
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="../anggota/index.php">Anggota</a></li>
-                                <li><a class="dropdown-item" href="../warga/index.php">Warga</a></li>
+                                <li><a class="dropdown-item" href="../anggota_kartar/index.php">Anggota</a></li>
+                                <li><a class="dropdown-item" href="../warga_kartar/index.php">Warga</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Admin</a></li>
+                                <li><a class="dropdown-item" href="../Admin_kartar/index.php">Admin</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

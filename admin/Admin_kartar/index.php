@@ -83,7 +83,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="menu.php">
+                            <a class="nav-link active" aria-current="page" href="../menu/menu.php">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
@@ -94,8 +94,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 Pengguna
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="../anggota/index.php">Anggota</a></li>
-                                <li><a class="dropdown-item" href="../warga/index.php">Warga</a></li>
+                                <li><a class="dropdown-item" href="../anggota_kartar/index.php">Anggota</a></li>
+                                <li><a class="dropdown-item" href="../warga_kartar/index.php">Warga</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
