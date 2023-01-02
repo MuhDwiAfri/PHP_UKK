@@ -61,7 +61,7 @@ include "../config.php";
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="../menu/menu.php">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
@@ -93,7 +93,7 @@ include "../config.php";
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="../menu/kontak.php">
                                 <span data-feather="bar-chart-2"></span>
                                 Reports
                             </a>
@@ -126,7 +126,7 @@ include "../config.php";
                     <form action="add.php" method="post" enctype="multipart/form-data">
 
                         <label for="nama"><b>Nama</b></label>
-                        <input type="text" id="nama" name="nama_admin" class="form-control" placeholder="Masukkan Nama Anda">
+                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama Anda">
                         <br>
                         <label for="number"><b>No. KTP</b></label>
                         <input type="number" id="ktp" name="ktp" class="form-control" placeholder="Masukkan No. KTP Anda">
@@ -135,7 +135,7 @@ include "../config.php";
                         <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan Alamat E-Mail">
                         <br>
                         <label for="telp"><b>No. Telp</b></label>
-                        <input type="text" id="telp" name="telp_admin" class="form-control" placeholder="Masukkan No. Telp Anda">
+                        <input type="text" id="telp" name="telp" class="form-control" placeholder="Masukkan No. Telp Anda">
                         <br>
                         <label for="text"><b>Alamat</b></label>
                         <textarea type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukkan Alamat Anda"></textarea>
@@ -151,10 +151,10 @@ include "../config.php";
     <?php
 
     if (isset($_POST['tambah'])) {
-        $nama = $_POST['nama_admin'];
+        $nama = $_POST['nama'];
         $ktp = $_POST['ktp'];
         $email = $_POST['email'];
-        $telp = $_POST['telp_admin'];
+        $telp = $_POST['telp'];
         $alamat = $_POST['alamat'];
 
 
@@ -168,7 +168,10 @@ include "../config.php";
         echo "<script>location.href='index.php';</script>";
     }
     ?>
-
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="./assets/hias/dashboard.js"></script>
 </body>
 
 </html>

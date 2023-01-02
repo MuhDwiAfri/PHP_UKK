@@ -6,11 +6,11 @@ $query = "SELECT * FROM warga ORDER BY id DESC";
 if (isset($_GET['cari'])) {
     $cari = $_GET['cari'];
 
-    $query = "SELECT * FROM anggota WHERE 
+    $query = "SELECT * FROM warga WHERE 
                 nama LIKE '%$cari%' OR
                 ktp LIKE '%$cari%' OR
-                telp LIKE '%$cari%' OR
                 email LIKE '%$cari%' OR
+                telp LIKE '%$cari%' OR
                 alamat LIKE '%$cari%'
                 '%$cari'
             ";
@@ -37,7 +37,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <meta name="generator" content="Hugo 0.84.0">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 
     <!-- Bootstrap core CSS -->
@@ -66,33 +66,33 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <body>
 
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="#"><b>Kartar 13</b></a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <header class="navbar navbar-dark sticky-top bg-primary p-0 justify-content-start shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center bg-dark" href="#"><b>Kartar 13</b></a>
+        <button class="navbar-toggler d-md-none collapsed mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+        <h6 class="text-white mt-1 col text-center"></h6>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3 text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
+                <a class="nav-link px-4 text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
             </div>
         </div>
     </header>
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="box-shadow: 0px 1px 6px 0.5px grey;">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary sidebar collapse" style="box-shadow: 0px 1px 6px 0.5px grey;">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../menu/menu.php">
+                            <a class="nav-link active text-white" aria-current="page" href="../menu/menu.php">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span data-feather="users"></span>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span data-feather="users" class="text-white"></span>
                                 Pengguna
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -105,27 +105,32 @@ while ($row = mysqli_fetch_assoc($result)) {
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="clipboard"></span>
+                            <a class="nav-link text-white" href="#">
+                                <span data-feather="clipboard" class="text-white"></span>
                                 Kegiatan
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="user"></span>
+                            <a class="nav-link text-white" href="#">
+                                <span data-feather="user" class="text-white"></span>
                                 Customers
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="bar-chart-2"></span>
+                            <a class="nav-link text-white" href="../menu/kontak.php">
+                                <span data-feather="bar-chart-2" class="text-white"></span>
                                 Reports
                             </a>
                         </li>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span class="text-white">Keuangan</span>
+                            <a class="link-secondary" href="#" aria-label="Add a new report">
+                            </a>
+                        </h6>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers"></span>
-                                Integrations
+                            <a class="nav-link text-white" href="../keuangan/index.php">
+                                <span data-feather="layers" class="text-white"></span>
+                                Pemasukkan
                             </a>
                         </li>
                     </ul>
@@ -136,14 +141,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Data Warga</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <!-- <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <span data-feather="calendar"></span>
-                            This week
-                        </button> -->
                     </div>
                 </div>
                 <p class="text-center">Warga RT 13</p>
@@ -153,7 +150,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </div>
                     <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
                         <form method="GET" action="index.php" class="d-flex">
-                            <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control">
+                            <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
                             <button type="submit" class="btn btn-primary btn-sm ms-3"><i class="bi bi-search px-2"></i></button>
                         </form>
                     </div>
@@ -165,7 +162,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <thead class="">
                             <th class="text-center">No.</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">No. KTP</th>
+                            <th class="text-center">KTP</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Telp</th>
                             <th class="text-center">Alamat</th>
@@ -174,7 +171,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <?php
 
                         include "../config.php";
-                        $batas   = 5;
+                        $batas   = 10;
                         $halaman = @$_GET['halaman'];
                         if (empty($halaman)) {
                             $posisi  = 0;
@@ -189,7 +186,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         ktp LIKE '%" . @$cari . "%' OR
                         email LIKE '%" . @$cari . "%' OR
                         telp LIKE '%" . @$cari . "%' OR
-                        alamat LIKE '%" . @$cari . "%' 
+                        alamat LIKE '%" . @$cari . "%'
                         '%" . @$cari . "%' 
                         order by id desc limit $posisi,$batas";
                         $hasil = mysqli_query($conn, $sql);
@@ -225,10 +222,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                             <div class="row text-start justify-content-center">
                                                                 <div class="col-3">
                                                                     Nama <br>
-                                                                    No. KTP <br>
+                                                                    KTP <br>
                                                                     E-mail <br>
                                                                     No. Telp<br>
-                                                                    Alamat
+                                                                    Alamat <br>
                                                                 </div>
                                                                 <div class="col-7">
                                                                     : <?php echo $orang['nama'] ?><br>
@@ -236,6 +233,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                                     : <?php echo $orang['email'] ?><br>
                                                                     : <?php echo $orang['telp'] ?><br>
                                                                     : <?php echo $orang['alamat'] ?><br>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -269,7 +267,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <hr>
                     <?php
 
-                    $query2     = mysqli_query($conn, "select * from anggota");
+                    $query2     = mysqli_query($conn, "select * from warga");
                     $jmldata    = mysqli_num_rows($query2);
                     $jmlhalaman = ceil($jmldata / $batas);
                     ?>
