@@ -66,122 +66,52 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <body>
 
-    <header class="navbar navbar-dark sticky-top bg-primary p-0 justify-content-start shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center bg-dark" href="#"><b>Kartar 13</b></a>
-        <button class="navbar-toggler d-md-none collapsed mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <h6 class="text-white mt-1 col text-center"></h6>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-4 text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
+    <?php include '../sidebar.php' ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Data Warga</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
             </div>
         </div>
-    </header>
+        <p class="text-center">Warga RT 13</p>
+        <div class="bd-highlight mb-3 row">
+            <div class="col-12 col-md-auto p-2 bd-highlight">
+                <a href="add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
+            </div>
+            <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
+                <form method="GET" action="index.php" class="d-flex">
+                    <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn btn-primary btn-sm ms-3"><i class="bi bi-search px-2"></i></button>
+                </form>
+            </div>
+        </div>
+        <p class="text-center"><b>Total Data : </b><?php echo mysqli_num_rows($result) ?></p>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary sidebar collapse" style="box-shadow: 0px 1px 6px 0.5px grey;">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="../menu/menu.php">
-                                <span data-feather="home"></span>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span data-feather="users" class="text-white"></span>
-                                Pengguna
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="../anggota_kartar/index.php">Anggota</a></li>
-                                <li><a class="dropdown-item" href="../warga_kartar/index.php">Warga</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="../Admin_kartar/index.php">Admin</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
-                                <span data-feather="clipboard" class="text-white"></span>
-                                Kegiatan
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">
-                                <span data-feather="user" class="text-white"></span>
-                                Customers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="../menu/kontak.php">
-                                <span data-feather="bar-chart-2" class="text-white"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                            <span class="text-white">Keuangan</span>
-                            <a class="link-secondary" href="#" aria-label="Add a new report">
-                            </a>
-                        </h6>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="../keuangan/index.php">
-                                <span data-feather="layers" class="text-white"></span>
-                                Pemasukkan
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered  table-sm" style="box-shadow: 0px 1px 6px 0.5px black;">
+                <thead class="">
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Nama</th>
+                    <th class="text-center">KTP</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Telp</th>
+                    <th class="text-center">Alamat</th>
+                    <th class="text-center">Aksi</th>
+                </thead>
+                <?php
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Data Warga</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                    </div>
-                </div>
-                <p class="text-center">Warga RT 13</p>
-                <div class="bd-highlight mb-3 row">
-                    <div class="col-12 col-md-auto p-2 bd-highlight">
-                        <a href="add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
-                    </div>
-                    <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
-                        <form method="GET" action="index.php" class="d-flex">
-                            <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
-                            <button type="submit" class="btn btn-primary btn-sm ms-3"><i class="bi bi-search px-2"></i></button>
-                        </form>
-                    </div>
-                </div>
-                <p class="text-center"><b>Total Data : </b><?php echo mysqli_num_rows($result) ?></p>
+                include "../config.php";
+                $batas   = 10;
+                $halaman = @$_GET['halaman'];
+                if (empty($halaman)) {
+                    $posisi  = 0;
+                    $halaman = 1;
+                } else {
+                    $posisi  = ($halaman - 1) * $batas;
+                }
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered  table-sm" style="box-shadow: 0px 1px 6px 0.5px black;">
-                        <thead class="">
-                            <th class="text-center">No.</th>
-                            <th class="text-center">Nama</th>
-                            <th class="text-center">KTP</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Telp</th>
-                            <th class="text-center">Alamat</th>
-                            <th class="text-center">Aksi</th>
-                        </thead>
-                        <?php
-
-                        include "../config.php";
-                        $batas   = 10;
-                        $halaman = @$_GET['halaman'];
-                        if (empty($halaman)) {
-                            $posisi  = 0;
-                            $halaman = 1;
-                        } else {
-                            $posisi  = ($halaman - 1) * $batas;
-                        }
-
-                        $no = $posisi + 1;
-                        $sql = "select * from warga WHERE 
+                $no = $posisi + 1;
+                $sql = "select * from warga WHERE 
                         nama LIKE '%" . @$cari . "%' OR
                         ktp LIKE '%" . @$cari . "%' OR
                         email LIKE '%" . @$cari . "%' OR
@@ -189,106 +119,106 @@ while ($row = mysqli_fetch_assoc($result)) {
                         alamat LIKE '%" . @$cari . "%'
                         '%" . @$cari . "%' 
                         order by id desc limit $posisi,$batas";
-                        $hasil = mysqli_query($conn, $sql);
-                        $i = 0;
-                        while ($orang = mysqli_fetch_array($hasil)) {
+                $hasil = mysqli_query($conn, $sql);
+                $i = 0;
+                while ($orang = mysqli_fetch_array($hasil)) {
+                ?>
+                    <tbody>
+                        <?php // foreach ($rows as $i => $orang) : 
                         ?>
-                            <tbody>
-                                <?php // foreach ($rows as $i => $orang) : 
-                                ?>
-                                <tr>
-                                    <td align="center"><?= $posisi + $i + 1 ?></td>
-                                    <td align=""><?= $orang['nama'] ?></td>
-                                    <td align=""><?= $orang['ktp'] ?></td>
-                                    <td align=""><?= $orang['email'] ?></td>
-                                    <td align="center"><?= $orang['telp'] ?></td>
-                                    <td align=""><?= $orang['alamat'] ?></td>
-                                    <td class="but">
-                                        <div class="d-flex flex-nowrap gap-2">
-                                            <!-- Detail Modal-->
-                                            <!-- Modal Start -->
-                                            <button type="button" class="btn btn-outline-primary bi bi-info-circle" data-bs-toggle="modal" data-bs-target="#ModalViewData<?php echo $orang['id'] ?>"></button>
-                                            <div class="modal fade" id="ModalViewData<?php echo $orang['id'] ?>" tabindex="-1" aria-labelledby="ModalViewDataLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header bg-success">
-                                                            <h1 class="modal-title fs-5 fw-bold text-white" id="ModalViewDataLabel">
-                                                                <i class="bi bi-list-ul"></i> Detail Info
-                                                                <?= $orang['nama'] ?>
-                                                            </h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <tr>
+                            <td align="center"><?= $posisi + $i + 1 ?></td>
+                            <td align=""><?= $orang['nama'] ?></td>
+                            <td align=""><?= $orang['ktp'] ?></td>
+                            <td align=""><?= $orang['email'] ?></td>
+                            <td align="center"><?= $orang['telp'] ?></td>
+                            <td align=""><?= $orang['alamat'] ?></td>
+                            <td class="but">
+                                <div class="d-flex flex-nowrap gap-2">
+                                    <!-- Detail Modal-->
+                                    <!-- Modal Start -->
+                                    <button type="button" class="btn btn-outline-primary bi bi-info-circle" data-bs-toggle="modal" data-bs-target="#ModalViewData<?php echo $orang['id'] ?>"></button>
+                                    <div class="modal fade" id="ModalViewData<?php echo $orang['id'] ?>" tabindex="-1" aria-labelledby="ModalViewDataLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <h1 class="modal-title fs-5 fw-bold text-white" id="ModalViewDataLabel">
+                                                        <i class="bi bi-list-ul"></i> Detail Info
+                                                        <?= $orang['nama'] ?>
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row text-start justify-content-center">
+                                                        <div class="col-3">
+                                                            Nama <br>
+                                                            KTP <br>
+                                                            E-mail <br>
+                                                            No. Telp<br>
+                                                            Alamat <br>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <div class="row text-start justify-content-center">
-                                                                <div class="col-3">
-                                                                    Nama <br>
-                                                                    KTP <br>
-                                                                    E-mail <br>
-                                                                    No. Telp<br>
-                                                                    Alamat <br>
-                                                                </div>
-                                                                <div class="col-7">
-                                                                    : <?php echo $orang['nama'] ?><br>
-                                                                    : <?php echo $orang['ktp'] ?><br>
-                                                                    : <?php echo $orang['email'] ?><br>
-                                                                    : <?php echo $orang['telp'] ?><br>
-                                                                    : <?php echo $orang['alamat'] ?><br>
+                                                        <div class="col-7">
+                                                            : <?php echo $orang['nama'] ?><br>
+                                                            : <?php echo $orang['ktp'] ?><br>
+                                                            : <?php echo $orang['email'] ?><br>
+                                                            : <?php echo $orang['telp'] ?><br>
+                                                            : <?php echo $orang['alamat'] ?><br>
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>
+                                                </div>
                                             </div>
-                                            <!-- Modal End -->
-
-                                            <div class="vr mx-2 bg-dark" style="width:1px;"></div>
-                                            <a class='btn btn-outline-warning' href='update.php?id=<?= $orang['id'] ?>'>
-                                                <i class='bi bi-pencil-square'></i>
-                                            </a>
-                                            <div class="vr mx-2 bg-dark" style="width:1px;"></div>
-                                            <a class='btn btn-outline-danger' href='delete.php?id=<?= $orang['id'] ?>' onclick="return confirm('Apakah anda yakin ingin menghapus ini ?')">
-                                                <i class='bi bi-trash'></i>
-                                            </a>
                                         </div>
-                                    </td>
-                                </tr>
-                                <?php //endforeach; 
-                                ?>
-                            </tbody>
-                        <?php
-                            $i++;
-                        }
+                                    </div>
+                                    <!-- Modal End -->
+
+                                    <div class="vr mx-2 bg-dark" style="width:1px;"></div>
+                                    <a class='btn btn-outline-warning' href='update.php?id=<?= $orang['id'] ?>'>
+                                        <i class='bi bi-pencil-square'></i>
+                                    </a>
+                                    <div class="vr mx-2 bg-dark" style="width:1px;"></div>
+                                    <a class='btn btn-outline-danger' href='delete.php?id=<?= $orang['id'] ?>' onclick="return confirm('Apakah anda yakin ingin menghapus ini ?')">
+                                        <i class='bi bi-trash'></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php //endforeach; 
                         ?>
-                    </table>
-                    <hr>
+                    </tbody>
+                <?php
+                    $i++;
+                }
+                ?>
+            </table>
+            <hr>
+            <?php
+
+            $query2     = mysqli_query($conn, "select * from warga");
+            $jmldata    = mysqli_num_rows($query2);
+            $jmlhalaman = ceil($jmldata / $batas);
+            ?>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+
                     <?php
-
-                    $query2     = mysqli_query($conn, "select * from warga");
-                    $jmldata    = mysqli_num_rows($query2);
-                    $jmlhalaman = ceil($jmldata / $batas);
+                    for ($i = 1; $i <= $jmlhalaman; $i++) {
+                        if ($i != $halaman) {
+                            echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
+                        } else {
+                            echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
+                        }
+                    }
                     ?>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-
-                            <?php
-                            for ($i = 1; $i <= $jmlhalaman; $i++) {
-                                if ($i != $halaman) {
-                                    echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
-                                } else {
-                                    echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
-                                }
-                            }
-                            ?>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Button trigger modal -->
+                </ul>
+            </nav>
         </div>
-        </main>
+        <!-- Button trigger modal -->
+        </div>
+    </main>
     </div>
     </div>
 

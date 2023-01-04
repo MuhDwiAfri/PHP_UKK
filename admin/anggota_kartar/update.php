@@ -48,77 +48,12 @@ $data = mysqli_fetch_assoc($result);
 
 <body>
 
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="#"><b>Kartar 13</b></a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3 text-white" href="../login/index.php">Sign out</a>
-            </div>
-        </div>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="box-shadow: 0px 1px 6px 0.5px grey;">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../menu/menu.php">
-                                <span data-feather="home"></span>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span data-feather="users"></span>
-                                Pengguna
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="../anggota_kartar/index.php">Anggota</a></li>
-                                <li><a class="dropdown-item" href="../warga_kartar/index.php">Warga</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="../Admin_kartar/index.php">Admin</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="clipboard"></span>
-                                Kegiatan
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="user"></span>
-                                Customers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../menu/kontak.php">
-                                <span data-feather="bar-chart-2"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers"></span>
-                                Integrations
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Edit Data : <?= $data['nama_anggota'] ?></h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <!-- <div class="btn-group me-2">
+    <?php include '../sidebar.php' ?>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Edit Data : <?= $data['nama_anggota'] ?></h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <!-- <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
@@ -126,29 +61,29 @@ $data = mysqli_fetch_assoc($result);
                             <span data-feather="calendar"></span>
                             This week
                         </button> -->
-                    </div>
-                </div>
-                <div class="container">
-                </div>
-                <form action="" method="post" enctype="multipart/form-data " action="proses_edit.php?id=$_GET['id']">
-                    <h6>
-                        <label for="nama"><b>Nama</b></label>
-                        <input type="text" id="nama" name="nama_anggota" value="<?php echo $data["nama_anggota"]; ?>" class="form-control">
-                        <br>
-                        <label for="telp"><b>No. Telp</b></label>
-                        <input type="text" id="telp" name="telp_anggota" value="<?php echo $data["telp_anggota"]; ?>" class="form-control">
-                        <br>
-                        <label for="email"><b>E-mail</b></label>
-                        <input type="email" id="email" name="email" value="<?php echo $data["email"]; ?>" class="form-control">
-                        <label for="text"><b>Alamat</b></label>
-                        <input type="text" id="alamat" name="alamat" value="<?php echo $data["alamat"]; ?>" class="form-control">
-
-                        <input class="btn btn-primary mt-3" type="submit" name="submit" value="Submit" onclick="return confirm('Data berhasil di Update')">
-                        <a href="index.php" class="btn btn-danger mt-3">Kembali</a>
-                    </h6>
-                </form>
-            </main>
+            </div>
         </div>
+        <div class="container">
+        </div>
+        <form action="" method="post" enctype="multipart/form-data " action="proses_edit.php?id=$_GET['id']">
+            <h6>
+                <label for="nama"><b>Nama</b></label>
+                <input type="text" id="nama" name="nama_anggota" value="<?php echo $data["nama_anggota"]; ?>" class="form-control">
+                <br>
+                <label for="telp"><b>No. Telp</b></label>
+                <input type="text" id="telp" name="telp_anggota" value="<?php echo $data["telp_anggota"]; ?>" class="form-control">
+                <br>
+                <label for="email"><b>E-mail</b></label>
+                <input type="email" id="email" name="email" value="<?php echo $data["email"]; ?>" class="form-control">
+                <label for="text"><b>Alamat</b></label>
+                <input type="text" id="alamat" name="alamat" value="<?php echo $data["alamat"]; ?>" class="form-control">
+
+                <input class="btn btn-primary mt-3" type="submit" name="submit" value="Submit" onclick="return confirm('Data berhasil di Update')">
+                <a href="index.php" class="btn btn-danger mt-3">Kembali</a>
+            </h6>
+        </form>
+    </main>
+    </div>
     </div>
     </div>
     </div>
