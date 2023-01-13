@@ -94,7 +94,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered  table-sm" style="box-shadow: 0px 1px 6px 0.5px black;">
-                <thead class="table-dark">
+                <thead class="">
                     <th class="text-center">No.</th>
                     <th class="text-center">Nama</th>
                     <th class="text-center">Telp</th>

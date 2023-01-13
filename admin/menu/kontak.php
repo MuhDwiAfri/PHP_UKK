@@ -65,9 +65,18 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         <b>Hubungi Admin</b>
                                     </div>
-                                    <p class="bold" style="text-transform: uppercase;">Nama : <?= $kontak['nama_admin'] ?></p>
-                                    <p class="bold" style="text-transform: uppercase;">E-Mail : <?= $kontak['email'] ?></p>
-                                    <p class="bold" style="text-transform: uppercase;">Telp / WA : <?= $kontak['telp_admin'] ?></p>
+                                    <label class="bold" style="text-transform: uppercase;">Nama :</label>
+                                    <h6>
+                                        <?= $kontak['nama_admin'] ?>
+                                    </h6>
+                                    <label class="bold" style="text-transform: uppercase;">E-Mail :</label>
+                                    <h6>
+                                        <?= $kontak['email'] ?>
+                                    </h6>
+                                    <label class="bold" style="text-transform: uppercase;">Telp / WA :</label>
+                                    <h6>
+                                        <?= $kontak['telp_admin'] ?>
+                                    </h6>
                                     <div class="text-center">
                                         <a class="h5 mb-0 font-weight-bold text-gray-800" href="https://wa.me/6283853779281"><i class="bi bi-whatsapp"></i></a>
                                         <a class="h5 mb-0 font-weight-bold text-gray-800" href="https://www.instagram.com/mdwiafri/"><i class="bi bi-instagram"></i></a>

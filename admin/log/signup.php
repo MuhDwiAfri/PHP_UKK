@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elegant Dashboard | Sign Up</title>
+  <title>Kartar Page | Register</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
   <!-- Custom styles -->
@@ -15,17 +15,18 @@
 <body>
   <div class="layer"></div>
   <main class="page-center">
-    <article class="sign-up">
-      <p class="sign-up__subtitle">Start creating the best possible user experience for you customers</p>
-      <form class="sign-up-form form" action="" method="">
-        <h1 class="sign-up__title">Get started</h1>
+    <article class="sign-up" style="margin: auto;">
+      <form style="" class="sign-up-form form font-weight-bold" action="" method="">
+        <h1 class="sign-up__title">Register</h1>
+        <!-- <p class="sign-up__subtitle">Silahkan daftar terlebih dahulu</p> -->
+        <hr style="width: 280px;">
         <label class="form-label-wrapper">
           <p class="form-label">Name</p>
           <input class="form-input" type="text" placeholder="Enter your name" required>
         </label>
         <label class="form-label-wrapper">
-          <p class="form-label">Team</p>
-          <input class="form-input" type="email" placeholder="Enter your Team name" required>
+          <p class="form-label">Username</p>
+          <input class="form-input" type="username" placeholder="Enter your username name" required>
         </label>
         <label class="form-label-wrapper">
           <p class="form-label">Email</p>
@@ -35,10 +36,12 @@
           <p class="form-label">Password</p>
           <input class="form-input" type="password" placeholder="Enter your password" required>
         </label>
-        <label class="form-checkbox-wrapper">
+        <span class="akun">Do you have account?</span><a class="link-info forget-link" href="./signin.php"> Login</a>
+
+        <!-- <label class="form-checkbox-wrapper">
           <input class="form-checkbox" type="checkbox" required>
           <span class="form-checkbox-label">Remember me next time</span>
-        </label>
+        </label> -->
         <button class="form-btn primary-default-btn transparent-btn">Sign in</button>
       </form>
     </article>

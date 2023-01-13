@@ -3258,6 +3258,13 @@ label {
   border-radius: 6px;
 }
 
+.akun{
+  font-family: Inter;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #767676;
+}
+
 .darkmode {
   background-color: #11111d;
   /* Navigation */

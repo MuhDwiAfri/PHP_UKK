@@ -98,7 +98,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <?php
 
                 include "../config.php";
-                $batas   = 10;
+                $batas   = 5;
                 $halaman = @$_GET['halaman'];
                 if (empty($halaman)) {
                     $posisi  = 0;

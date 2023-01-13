@@ -65,13 +65,13 @@
                         </a>
                     </h6>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="../keuangan/index.php">
+                        <a class="nav-link text-white" href="../keuangan/kas_masuk.php">
                             <i class="bi bi-layers"></i>
                             Pemasukkan
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="../keuangan/kas_keluar.php">
+                        <a class="nav-link text-white" href="../keluaran/kas_keluar.php">
                             <i class="bi bi-wallet2"></i>
                             Pengeluaran
                         </a>
