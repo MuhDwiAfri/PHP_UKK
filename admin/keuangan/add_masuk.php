@@ -51,7 +51,7 @@ include "../config.php";
             </div>
         </div>
         <div class="container">
-            <form action="add.php" method="post" enctype="multipart/form-data">
+            <form action="add_masuk.php" method="post" enctype="multipart/form-data">
 
                 <label for="sumber"><b>Nama</b></label>
                 <input type="text" id="sumber" name="sumber" class="form-control" placeholder="Masukkan Nama Anda">

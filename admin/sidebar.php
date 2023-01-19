@@ -3,10 +3,9 @@
     <button class="navbar-toggler d-md-none collapsed mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <h6 class="text-white mt-1 col text-center"></h6>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-4 text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
+            <a class="nav-link px-3  text-white" href="../log/signin.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
         </div>
     </div>
 </header>
@@ -17,7 +16,7 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <i class="bi bi-plus-circle text-white"></i>
+                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
                         <span class="text-white" style="margin-right: 5rem;"> Menu</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                         </a>
@@ -35,7 +34,7 @@
                         </a>
                     </li>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <i class="bi bi-plus-circle text-white"></i>
+                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
                         <span class="text-white" style="margin-right: 5rem;"> Pengguna</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                         </a>
@@ -59,7 +58,7 @@
                         </a>
                     </li>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <i class="bi bi-plus-circle text-white"></i>
+                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
                         <span class="text-white" style="margin-right: 5rem;"> Keuangan</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                         </a>

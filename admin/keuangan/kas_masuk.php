@@ -75,8 +75,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </button>
                 </div>
                 <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
+                    <a href="export_masuk.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
                 </div>
             </div>
         </div>

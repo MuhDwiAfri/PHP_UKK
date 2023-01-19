@@ -76,7 +76,6 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
             <div class="row ">
-
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-3 col-md-8 mb-4">
                     <div class="card text-dark bg-success mb-3">
@@ -101,7 +100,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2"> <a href="../keuangan/index.php" class="text-white" style="text-decoration: none;"> More info</a></div>
+                        <div class="container mb-2"> <a href="../keuangan/kas_masuk.php" class="text-white" style="text-decoration: none;"> More info</a></div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-8 mb-4">
@@ -127,7 +126,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2"> <a href="../keuangan/kas_keluar.php" class="text-white" style="text-decoration: none;"> More info</a></div>
+                        <div class="container mb-2"> <a href="../keluaran/kas_keluar.php" class="text-white" style="text-decoration: none;"> More info</a></div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-8 mb-4">
@@ -192,7 +191,28 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         }
 
         ?>
-        <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan</h5>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                tambah
+            </button>
+        </h5>
         <br>
         <div class="col-lg-6">
             <div class="card shadow mb-4">

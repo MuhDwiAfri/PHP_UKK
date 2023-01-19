@@ -51,6 +51,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <body>
 
     <?php include '../sidebar.php' ?>
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2"><b>CONTACT</b></h1>
@@ -65,19 +66,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         <b>Hubungi Admin</b>
                                     </div>
-                                    <label class="bold" style="text-transform: uppercase;">Nama :</label>
-                                    <h6>
-                                        <?= $kontak['nama_admin'] ?>
-                                    </h6>
-                                    <label class="bold" style="text-transform: uppercase;">E-Mail :</label>
-                                    <h6>
-                                        <?= $kontak['email'] ?>
-                                    </h6>
-                                    <label class="bold" style="text-transform: uppercase;">Telp / WA :</label>
-                                    <h6>
-                                        <?= $kontak['telp_admin'] ?>
-                                    </h6>
-                                    <div class="text-center">
+                                    <label class="bold" style="text-transform: uppercase;">Nama : <?= $kontak['nama_admin'] ?></label>
+                                    <label class="bold" style=" margin-top: 4px; ">E-mail : <?= $kontak['email'] ?></label>
+                                    <label class="bold" style="text-transform: uppercase; margin-top: 4px; ">Telp / WA : <?= $kontak['telp_admin'] ?></label>
+                                    <div class="text-center" style="margin-top: 8px; ">
                                         <a class="h5 mb-0 font-weight-bold text-gray-800" href="https://wa.me/6283853779281"><i class="bi bi-whatsapp"></i></a>
                                         <a class="h5 mb-0 font-weight-bold text-gray-800" href="https://www.instagram.com/mdwiafri/"><i class="bi bi-instagram"></i></a>
                                         <a class="h5 mb-0 font-weight-bold text-gray-800" href="mailto: muhammaddwiafriza30@gmail.com"> <i class="bi bi-envelope-at"></i></a>

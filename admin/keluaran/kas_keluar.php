@@ -67,7 +67,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <?php include '../sidebar.php' ?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="center" style="text-transform: uppercase;">Dana Keluar</h5>
+            <h5 class="center" style="text-transform: uppercase;">Dana pengeluaran</h5>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2">
                     <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -75,8 +75,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </button>
                 </div>
                 <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
+                    <a href="export_keluar.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
                 </div>
             </div>
         </div>
