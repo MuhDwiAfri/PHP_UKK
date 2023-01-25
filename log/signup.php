@@ -3,45 +3,45 @@ session_start();
 include '../config.php';
 
 
-if (isset($_POST['email'])) {
+// if (isset($_POST['email'])) {
 
-  $email = $_POST['email'];
-  $username = $_POST['username'];
-  $name = $_POST['name'];
-  $password = $_POST['password'];
-  $role = $_POST['role'];
+//   $email = $_POST['email'];
+//   $username = $_POST['username'];
+//   $name = $_POST['name'];
+//   $password = $_POST['password'];
+//   $role = $_POST['role'];
 
-  // cek apakah email sudah tersedia didatabase
-  $result = mysqli_query($conn, "SELECT * FROM login WHERE email = 'email'");
+//   // cek apakah email sudah tersedia didatabase
+//   $result = mysqli_query($conn, "SELECT * FROM login WHERE email = 'email'");
 
-  // jika ada maka kirimkan error
-  if (mysqli_fetch_assoc($result)) {
-    echo "<script>
-				    alert('email sudah terdaftar!')
-		      </script>";
-    return false;
-  }
+//   // jika ada maka kirimkan error
+//   if (mysqli_fetch_assoc($result)) {
+//     echo "<script>
+// 				    alert('email sudah terdaftar!')
+// 		      </script>";
+//     return false;
+//   }
 
-  // jika tidak ada hash password 
-  $password = password_hash($password, PASSWORD_DEFAULT);
+//   // jika tidak ada hash password 
+//   $password = password_hash($password, PASSWORD_DEFAULT);
 
-  // simpan ke database
-  mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password', '$role', '$email')");
+//   // simpan ke database
+//   mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password', '$role', '$email')");
 
-  // redirect ke halaman home
+//   // redirect ke halaman home
 
-  if (mysqli_affected_rows($conn) > 0) {
-    echo "<script>
-				alert('user baru berhasil ditambahkan!');
-			  </script>";
+//   if (mysqli_affected_rows($conn) > 0) {
+//     echo "<script>
+// 				alert('user baru berhasil ditambahkan!');
+// 			  </script>";
 
-    header("location:signin.php");
-  } else {
-    echo "<script>
-				alert('user gagal ditambahkan!');
-			  </script>";
-  }
-};
+//     header("location:signin.php");
+//   } else {
+//     echo "<script>
+// 				alert('user gagal ditambahkan!');
+// 			  </script>";
+//   }
+// };
 
 ?>
 
@@ -83,7 +83,8 @@ if (isset($_POST['email'])) {
         </label>
 
         <label class="form-label-wrapper">
-          <select name="role">
+          <p class="form-label">Role</p>
+          <select name="role" class="form-input">
             <option selected value="Admin">Admin</option>
             <option value="Anggota">Anggota</option>
             <option value="Warga">Warga</option>

@@ -61,13 +61,13 @@ include "../config.php";
             <form action="add.php" method="post" enctype="multipart/form-data">
 
                 <label for="nama"><b>Nama</b></label>
-                <input type="text" id="nama" name="nama_admin" class="form-control" placeholder="Masukkan Nama Anda">
+                <input type="text" id="nama" name="nama_admin" class="form-control" placeholder="Masukkan Nama Anda" required>
                 <br>
                 <label for="telp"><b>No. Telp</b></label>
-                <input type="text" id="telp" name="telp_admin" class="form-control" placeholder="Masukkan No. Telp Anda">
+                <input type="text" id="telp" name="telp_admin" class="form-control" placeholder="Masukkan No. Telp Anda" required>
                 <br>
                 <label for="email"><b>E-mail</b></label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan Alamat E-Mail">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan Alamat E-Mail" required>
 
                 <input class="btn btn-success mt-3" type="submit" name="tambah" value="Tambah">
                 <a href="index.php" class="btn btn-danger mt-3">Kembali</a>
@@ -88,10 +88,9 @@ include "../config.php";
                       VALUES ( '$nama', '$telp', '$email')";
 
         $queryInsert = mysqli_query($conn, $sqlInsert);
-
-
-        // header("location: index.php");
         echo "<script>location.href='index.php';</script>";
+    } else {
+        echo "Data Berhasil Ditambah";
     }
     ?>
 

@@ -5,7 +5,7 @@
     </button>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3  text-white" href="../log/signin.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
+            <a class="nav-link px-3  text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
         </div>
     </div>
 </header>
@@ -15,10 +15,16 @@
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary sidebar collapse" style="box-shadow: 0px 1px 6px 0.5px grey;">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
-                        <span class="text-white" style="margin-right: 5rem;"> Menu</span>
+                    <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted"> -->
+                    <!-- <i class="bi bi-plus-circle text-white"></i> -->
+                    <!-- <span class="text-white" style="margin-right: 5rem;"> Menu</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
+                        </a>
+                    </h6> -->
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-white">
+                        <span>Menu</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span class="text-white" data-feather="plus-circle"></span>
                         </a>
                     </h6>
                     <li class="nav-item">
@@ -30,13 +36,19 @@
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="../menu/kontak.php">
                             <i class="bi bi-telephone"></i>
-                            Report
+                            Contact
                         </a>
                     </li>
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
-                        <span class="text-white" style="margin-right: 5rem;"> Pengguna</span>
+                    <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted"> -->
+                    <!-- <i class="bi bi-plus-circle text-white"></i> -->
+                    <!-- <span class="text-white" style="margin-right: 5rem;"> Pengguna</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
+                        </a>
+                    </h6> -->
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-white">
+                        <span>Pengguna</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span class="text-white" data-feather="plus-circle"></span>
                         </a>
                     </h6>
                     <li class="nav-item">
@@ -57,10 +69,16 @@
                             Warga
                         </a>
                     </li>
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
-                        <!-- <i class="bi bi-plus-circle text-white"></i> -->
-                        <span class="text-white" style="margin-right: 5rem;"> Keuangan</span>
+                    <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted"> -->
+                    <!-- <i class="bi bi-plus-circle text-white"></i> -->
+                    <!-- <span class="text-white" style="margin-right: 5rem;"> Keuangan</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
+                        </a>
+                    </h6> -->
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-white">
+                        <span>Keuangan</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span class="text-white" data-feather="plus-circle"></span>
                         </a>
                     </h6>
                     <li class="nav-item">

@@ -74,6 +74,15 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
     <?php include '../sidebar.php' ?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <? ?></h5>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2"></div>
+            </div>
+            <div class="btn-group me-2">
+                <a href="export_all.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
+            </div>
+        </div>
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
             <div class="row ">
                 <!-- Earnings (Monthly) Card Example -->
@@ -182,7 +191,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <?php
         include '../config.php';
 
-        $query = "SELECT * FROM laporan where id=2";
+        $query = "SELECT * FROM laporan where id=3";
         $result = mysqli_query($conn, $query);
         $rows = [];
 
@@ -194,41 +203,67 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <div class="modal-header bg-primary">
+                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
+                            <i class="bi bi-journal"></i>
+                            Menambahkan Laporan
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <form action="menu.php" method="post">
+                            <label for="info"><b>Informasi</b></label>
+                            <input type="text" id="info" name="info" class="form-control" placeholder="Masukkan laporan">
+                            <br>
+                            <label for="tgl_laporan"><b>Tanggal Laporan</b></label>
+                            <input type="date" id="tgl_laporan" name="tgl_laporan" class="form-control">
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <input class="btn btn-success" type="submit" name="submit" value="Tambah">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kembali</button>
                     </div>
                 </div>
             </div>
         </div>
-        <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                tambah
-            </button>
-        </h5>
-        <br>
-        <div class="col-lg-6">
-            <div class="card shadow mb-4">
-                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                    <h6 class="m-0 font-weight-bold text-primary">Laporan 1</h6>
-                </a>
-                <div class="collapse show" id="collapseCardExample">
+        <?php
+
+        if (isset($_POST['submit'])) {
+            $info = $_POST['info'];
+            $tgl_laporan = $_POST['tgl_laporan'];
+
+            $sqlInsert = "INSERT INTO laporan ( info, tgl_laporan)
+                  VALUES ( '$info', '$tgl_laporan')";
+
+            $queryInsert = mysqli_query($conn, $sqlInsert);
+
+
+            // header("location: index.php");
+            echo "<script>location.href='menu.php';</script>";
+        }
+
+        ?>
+        <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan</h5>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Tambah Laporan ke Database
+        </button>
+        <div class="col-lg-6 mt-3">
+            <?php foreach ($rows as $key => $laporan) : ?>
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h6 class="d-flex justify-content-between">
+                            <span>Laporan <?= $key + 1 ?></span>
+                            <span><?= $laporan['tgl_laporan'] ?></span>
+                        </h6>
+                    </div>
                     <div class="card-body">
-                        <?php foreach ($rows as $laporan) : ?>
-                            <?= $laporan['info'] ?>
-                        <?php endforeach; ?>
+                        <p class="m-0"><?= $laporan['info'] ?></p>
                     </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </main>
+
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>

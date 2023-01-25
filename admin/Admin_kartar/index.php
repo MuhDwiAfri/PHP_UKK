@@ -73,6 +73,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
         <p class="text-center">Warga RT 13</p>
         <div class="bd-highlight mb-3 row">
+
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
             </div>

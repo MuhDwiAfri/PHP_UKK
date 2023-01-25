@@ -62,13 +62,13 @@ include "../config.php";
             <form action="add.php" method="post" enctype="multipart/form-data">
 
                 <label for="nama"><b>Nama</b></label>
-                <input type="text" id="nama" name="nama_anggota" class="form-control" placeholder="Masukkan Nama Anda">
+                <input type="text" id="nama" name="nama_anggota" class="form-control" placeholder="Masukkan Nama Anda" required>
                 <br>
                 <label for="telp"><b>No. Telp</b></label>
-                <input type="text" id="telp" name="telp_anggota" class="form-control" placeholder="Masukkan No. Telp Anda">
+                <input type="text" id="telp" name="telp_anggota" class="form-control" placeholder="Masukkan No. Telp Anda" required>
                 <br>
                 <label for="email"><b>E-mail</b></label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan Alamat E-Mail">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan Alamat E-Mail" required>
                 <br>
                 <label for="ttext"><b>Alamat</b></label>
                 <textarea type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukkan Alamat Anda"></textarea>
