@@ -11,13 +11,7 @@
 	<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh">
 		<form class="border shadow p-3 rounded" action="cek_login.php" method="post" style="width: 450px;">
 			<h1 class="text_login">LOGIN</h1>
-			<?php
-			if (isset($_GET['pesan'])) {
-				if ($_GET['pesan'] == "gagal") {
-					echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
-				}
-			}
-			?>
+
 			<div class="mb-3">
 				<label for="username" class="form-label">User name</label>
 				<input type="text" class="form-control" name="username" id="username" required>

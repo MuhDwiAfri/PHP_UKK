@@ -10,13 +10,12 @@ $password = $_POST['password'];
 $user = mysqli_query($conn, "SELECT * FROM login WHERE username='$username'");
 
 if (mysqli_num_rows($user)) {
-    // cek password
     $row = mysqli_fetch_assoc($user);
     if (password_verify($password, $row['password'])) {
         if ($row['role'] == "admin") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "admin";
-            header("location:halaman_admin.php");
+            header("location:../menu/menu.php");
         } else if ($row['role'] == "anggota") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "anggota";

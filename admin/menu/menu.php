@@ -63,6 +63,8 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                 font-size: 3.5rem;
             }
         }
+
+        .btn {}
     </style>
 
 
@@ -72,10 +74,11 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
 <body>
 
+    <!-- <div class="container" href="../login/index.php"></div> -->
     <?php include '../sidebar.php' ?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <? ?></h5>
+            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?php echo $_SESSION['username']; ?> <? ?></h5>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2"></div>
             </div>
@@ -96,7 +99,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <i class="bi bi-safe2-fill"></i>
+                                            <i class="bi bi-cash"></i>
                                             <b>
                                                 <?php
                                                 include '../config.php';
@@ -191,7 +194,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <?php
         include '../config.php';
 
-        $query = "SELECT * FROM laporan where id=3";
+        $query = "SELECT * FROM laporan where id=2";
         $result = mysqli_query($conn, $query);
         $rows = [];
 
@@ -205,7 +208,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
-                            <i class="bi bi-journal"></i>
+                            <i class="bi bi-journals"></i>
                             Menambahkan Laporan
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

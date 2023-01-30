@@ -15,7 +15,7 @@
     }
 
     ?>
-    <h1>Halaman Admin</h1>
+    <h1>Halaman Anggota</h1>
 
     <p>Halo <b><?php echo $_SESSION['username']; ?></b> Anda telah login sebagai <b><?php echo $_SESSION['role']; ?></b>.</p>
     <a href="logout.php">LOGOUT</a>

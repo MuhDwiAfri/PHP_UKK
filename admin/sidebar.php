@@ -1,12 +1,16 @@
-<header class="navbar navbar-dark sticky-top bg-primary p-0 justify-content-start shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center bg-dark" href="#"><b>Kartar 13</b></a>
-    <button class="navbar-toggler d-md-none collapsed mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<header class="navbar navbar-dark sticky-top bg-primary p-0 d-flex shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center  bg-dark" href="#"><b>Kartar 13</b></a>
+    <button class="navbar-toggler d-md-none collapsed mx-2 " type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <a class="nav-link px-3  text-white" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Sign out</a>
-        </div>
+    <div class="btn-group dropstart ms-auto" style="margin-right: 17px;">
+        <button class="btn btn-primary dropdown-toggle text-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-gear-fill"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+            <li><a class="dropdown-item" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Keluar</a></li>
+        </ul>
     </div>
 </header>
 
