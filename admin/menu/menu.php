@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['username'])) {
+    header('location: ../login/index.php');
+}
 include "../config.php";
 
 $query = "SELECT * FROM admin_kartar ORDER BY id_admin DESC";

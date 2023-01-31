@@ -19,11 +19,11 @@ if (mysqli_num_rows($user)) {
         } else if ($row['role'] == "anggota") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "anggota";
-            header("location:halaman_anggota.php");
+            header("location:./../../anggota/menu/menu.php");
         } else if ($row['role'] == "warga") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "warga";
-            header("location:halaman_warga.php");
+            header("location:./../../warga/menu/menu.php");
         } else {
             header("location:index.php?pesan=gagal");
         }
@@ -33,3 +33,5 @@ if (mysqli_num_rows($user)) {
 } else {
     header("location:index.php?pesan=username tidak ditemukan");
 }
+?>
+<div class="href" href="./../../anggota/"></div>
