@@ -3,14 +3,14 @@ session_start();
 
 include "../config.php";
 
-$query = "SELECT * FROM admin_kartar ORDER BY id_admin DESC";
+$query = "SELECT * FROM anggota ORDER BY id_anggota DESC";
 
 if (isset($_GET['cari'])) {
     $cari = $_GET['cari'];
 
-    $query = "SELECT * FROM admin_kartar WHERE 
-                nama_admin LIKE '%$cari%' OR
-                telp_admin LIKE '%$cari%' OR
+    $query = "SELECT * FROM anggota WHERE 
+                nama_anggota LIKE '%$cari%' OR
+                telp_anggota LIKE '%$cari%' OR
                 email LIKE '%$cari%'
             ";
 }
@@ -78,12 +78,9 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <?php include '../sidebar.php' ?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?php echo $_SESSION['username']; ?> <? ?></h5>
+            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?= $_SESSION['role']; ?> <?php echo $_SESSION['username']; ?> <? ?></h5>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2"></div>
-            </div>
-            <div class="btn-group me-2">
-                <a href="export_all.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
             </div>
         </div>
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
@@ -160,10 +157,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2 text-white">&nbsp Mingguan : Rp.</div>
-                        <!-- <?php
-                                echo number_format($jumlahmasuk, 2, ',', '.');
-                                ?> -->
+                        <div class="container mb-2 text-white">&nbsp Mingguan : <?= "Rp. " . number_format($pemasukan['total'] - $pengeluaran['total']); ?></div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-8 mb-4">
@@ -185,7 +179,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2"> <a href="../Admin_kartar/index.php" class="text-white" style="text-decoration: none;"> More info</a></div>
+                        <div class="container mb-2"> <a href="../anggota_kartar/index.php" class="text-white" style="text-decoration: none;"> More info</a></div>
                     </div>
                 </div>
             </div>

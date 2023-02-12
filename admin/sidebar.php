@@ -1,5 +1,5 @@
 <header class="navbar navbar-dark sticky-top bg-primary p-0 d-flex shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center  bg-dark" href="#"><b>Kartar 13</b></a>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center  bg-dark" href="#"> <b>Kartar 13</b></a>
     <button class="navbar-toggler d-md-none collapsed mx-2 " type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,7 +9,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="#">Pengaturan</a></li>
-            <li><a class="dropdown-item" href="../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Keluar</a></li>
+            <li><a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Keluar</a></li>
         </ul>
     </div>
 </header>

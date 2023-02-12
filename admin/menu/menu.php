@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('location: ../login/index.php');
+    header('location: ../../login/index.php');
 }
 include "../config.php";
 
@@ -43,6 +43,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -65,8 +66,6 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                 font-size: 3.5rem;
             }
         }
-
-        .btn {}
     </style>
 
 
@@ -80,12 +79,23 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <?php include '../sidebar.php' ?>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?php echo $_SESSION['username']; ?> <? ?></h5>
+            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?= $_SESSION['role']; ?> <?php echo $_SESSION['username']; ?> <? ?></h5>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2"></div>
             </div>
-            <div class="btn-group me-2">
+            <!-- <div class="btn-group me-2">
                 <a href="export_all.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
+            </div> -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Export data
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="export_all.php"><i class="bi bi-file-earmark-word"></i> Ms. Word</a></li>
+                    <li><a class="dropdown-item" href="export_excel.php"><i class="bi bi-file-earmark-spreadsheet"></i> Ms. Excel</a></li>
+                    <hr>
+                    <li><a class="dropdown-item" href="cetak.php"><i class="bi bi-printer-fill"></i> Cetak Print</a></li>
+                </ul>
             </div>
         </div>
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
@@ -162,7 +172,8 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2 text-white">&nbsp Mingguan : Rp.</div>
+                        <!-- <div class="container mb-2 text-white">&nbsp Mingguan : Rp.</div> -->
+                        <div class="container mb-2 text-white">SISA UANG KESELURUHAN </div>
                         <!-- <?php
                                 echo number_format($jumlahmasuk, 2, ',', '.');
                                 ?> -->
@@ -205,7 +216,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         }
 
         ?>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
@@ -230,7 +241,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <?php
 
         if (isset($_POST['submit'])) {
@@ -249,13 +260,14 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
         ?>
         <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan</h5>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Laporan ke Database
-        </button>
-        <div class="col-lg-6 mt-3">
+        </button> -->
+        <a class="btn btn-primary" href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=ukk">Menambahkan Ke database</a>
+        <div class="col-lg-5 mt-3">
             <?php foreach ($rows as $key => $laporan) : ?>
                 <div class="card shadow mb-4">
-                    <div class="card-header">
+                    <div class="card-header bg-success text-white">
                         <h6 class="d-flex justify-content-between">
                             <span>Laporan <?= $key + 1 ?></span>
                             <span><?= $laporan['tgl_laporan'] ?></span>

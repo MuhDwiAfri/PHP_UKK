@@ -74,10 +74,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <span id="jam"></span>
                     </button>
                 </div>
-                <div class="btn-group me-2">
-                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
-                    <a href="export_keluar.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
-                </div>
             </div>
         </div>
         <p class="text-center">Warga RT 13</p>

@@ -17,6 +17,7 @@ $data = mysqli_fetch_assoc($result);
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
@@ -80,7 +81,7 @@ $data = mysqli_fetch_assoc($result);
                 <input type="text" id="telp" name="telp" value="<?php echo $data["telp"]; ?>" class="form-control">
                 <br>
                 <label for="text"><b>Alamat</b></label>
-                <textarea type="text" id="alamat" name="alamat" value="<?php echo $data["alamat"]; ?>" class="form-control"></textarea>
+                <input type="text" id="alamat" name="alamat" value="<?php echo $data["alamat"]; ?>" class="form-control">
 
                 <input class="btn btn-primary mt-3" type="submit" name="submit" value="Submit" onclick="return confirm('Data berhasil di Update')">
                 <a href="index.php" class="btn btn-danger mt-3">Kembali</a>
