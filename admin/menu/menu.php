@@ -5,6 +5,20 @@ if (!isset($_SESSION['username'])) {
 }
 include "../config.php";
 
+if (isset($_POST['submit'])) {
+    $tgl_laporan = $_POST['tgl_laporan'];
+    $info = $_POST['info'];
+
+    $query = "INSERT INTO laporan VALUES('', '$info', '$tgl_laporan')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>alert('Success insert data')</script>";
+    } else {
+        echo "<script>alert('Success insert data')</script>";
+    }
+}
+
 $query = "SELECT * FROM admin_kartar ORDER BY id_admin DESC";
 
 if (isset($_GET['cari'])) {
@@ -101,7 +115,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
             <div class="row ">
                 <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-3 col-md-8 mb-4">
+                <div class="col-xl-3 col-md-12 mb-4">
                     <div class="card text-dark bg-success mb-3">
                         <div class="card border-success mb-1  shadow h-100">
                             <div class="card-header bg-success text-uppercase text-white mb-1 ">
@@ -127,7 +141,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                         <div class="container mb-2"> <a href="../keuangan/kas_masuk.php" class="text-white" style="text-decoration: none;"> More info</a></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-8 mb-4">
+                <div class="col-xl-3 col-md-12 mb-4">
                     <div class="card text-dark bg-danger mb-3">
                         <div class="card border-danger mb-1  shadow h-100">
                             <div class="card-header bg-danger text-uppercase text-white mb-1 ">
@@ -153,7 +167,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                         <div class="container mb-2"> <a href="../keluaran/kas_keluar.php" class="text-white" style="text-decoration: none;"> More info</a></div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-8 mb-4">
+                <div class="col-xl-3 col-md-12 mb-4">
                     <div class="card text-dark bg-info mb-3">
                         <div class="card border-info mb-1  shadow h-100">
                             <div class="card-header bg-info text-uppercase text-white mb-1 ">
@@ -179,7 +193,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 ?> -->
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-8 mb-4">
+                <div class="col-xl-3 col-md-12 mb-4">
                     <div class="card text-dark bg-secondary mb-3">
                         <div class="card border-secondary mb-1  shadow h-100">
                             <div class="card-header bg-secondary text-uppercase text-white mb-1 ">
@@ -207,7 +221,8 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <?php
         include '../config.php';
 
-        $query = "SELECT * FROM laporan where id=2";
+        // $query = "SELECT * FROM laporan where id=3";
+        $query = "SELECT * FROM laporan order by id desc limit 1";
         $result = mysqli_query($conn, $query);
         $rows = [];
 
@@ -216,32 +231,6 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         }
 
         ?>
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
-                            <i class="bi bi-journals"></i>
-                            Menambahkan Laporan
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="menu.php" method="post">
-                            <label for="info"><b>Informasi</b></label>
-                            <input type="text" id="info" name="info" class="form-control" placeholder="Masukkan laporan">
-                            <br>
-                            <label for="tgl_laporan"><b>Tanggal Laporan</b></label>
-                            <input type="date" id="tgl_laporan" name="tgl_laporan" class="form-control">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <input class="btn btn-success" type="submit" name="submit" value="Tambah">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kembali</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <?php
 
         if (isset($_POST['submit'])) {
@@ -260,10 +249,37 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
         ?>
         <h5 style="text-transform: uppercase; font-weight:bold;">Informasi Kegiatan</h5>
-        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Laporan ke Database
-        </button> -->
-        <a class="btn btn-primary" href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=ukk">Menambahkan Ke database</a>
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="">
+                        <div class="modal-header bg-primary text-white">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-journal-bookmark"></i> Menambahkan Laporan</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="input-info">Tanggal Kegiatan : </label>
+                                <input type="date" class="form-control" id="input-nama" name="tgl_laporan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-tgl_laporan">Informasi Kegiatan : </label>
+                                <textarea type="text" class="form-control" id="input-email" name="info" required></textarea>
+                            </div>
+                            <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- <a class="btn btn-primary" href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=ukk">Menambahkan Ke database</a> -->
         <div class="col-lg-5 mt-3">
             <?php foreach ($rows as $key => $laporan) : ?>
                 <div class="card shadow mb-4">

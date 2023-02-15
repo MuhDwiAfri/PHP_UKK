@@ -4,8 +4,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="btn-group dropstart ms-auto" style="margin-right: 17px;">
-        <button class="btn btn-primary dropdown-toggle text-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-gear-fill"></i>
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-gear-fill"></i> Pengaturan
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="#">Pengaturan</a></li>
@@ -100,3 +100,5 @@
                 </ul>
             </div>
         </nav>
+    </div>
+</div>

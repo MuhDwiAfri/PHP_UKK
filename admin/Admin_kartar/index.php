@@ -65,7 +65,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <body>
     <?php include '../sidebar.php' ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-md-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h5 class="center" style="text-transform: uppercase;">Data Admin</h5>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -73,18 +73,19 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
         <p class="text-center">Warga RT 13</p>
-        <div class="bd-highlight mb-3 row">
 
+        <div class="bd-highlight mb-3 d-flex flex-column">
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
             </div>
-            <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
+            <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight ">
                 <form method="GET" action="index.php" class="d-flex">
                     <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
                     <button type="submit" class="btn btn-primary btn-sm ms-3"><i class="bi bi-search px-2"></i></button>
                 </form>
             </div>
         </div>
+
         <p class="text-center"><b>Total Data : </b><?php echo mysqli_num_rows($result) ?></p>
 
         <div class="table-responsive">
@@ -184,27 +185,27 @@ while ($row = mysqli_fetch_assoc($result)) {
                 ?>
             </table>
             <hr>
-            <?php
-
-            $query2     = mysqli_query($conn, "select * from admin_kartar");
-            $jmldata    = mysqli_num_rows($query2);
-            $jmlhalaman = ceil($jmldata / $batas);
-            ?>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-
-                    <?php
-                    for ($i = 1; $i <= $jmlhalaman; $i++) {
-                        if ($i != $halaman) {
-                            echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
-                        } else {
-                            echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
-                        }
-                    }
-                    ?>
-                </ul>
-            </nav>
         </div>
+        <?php
+
+        $query2     = mysqli_query($conn, "select * from admin_kartar");
+        $jmldata    = mysqli_num_rows($query2);
+        $jmlhalaman = ceil($jmldata / $batas);
+        ?>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+
+                <?php
+                for ($i = 1; $i <= $jmlhalaman; $i++) {
+                    if ($i != $halaman) {
+                        echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
+                    } else {
+                        echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
+                    }
+                }
+                ?>
+            </ul>
+        </nav>
         <!-- Button trigger modal -->
         </div>
     </main>

@@ -188,27 +188,27 @@ while ($row = mysqli_fetch_assoc($result)) {
                 ?>
             </table>
             <hr>
-            <?php
-
-            $query2     = mysqli_query($conn, "select * from anggota");
-            $jmldata    = mysqli_num_rows($query2);
-            $jmlhalaman = ceil($jmldata / $batas);
-            ?>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-
-                    <?php
-                    for ($i = 1; $i <= $jmlhalaman; $i++) {
-                        if ($i != $halaman) {
-                            echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
-                        } else {
-                            echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
-                        }
-                    }
-                    ?>
-                </ul>
-            </nav>
         </div>
+        <?php
+
+        $query2     = mysqli_query($conn, "select * from anggota");
+        $jmldata    = mysqli_num_rows($query2);
+        $jmlhalaman = ceil($jmldata / $batas);
+        ?>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+
+                <?php
+                for ($i = 1; $i <= $jmlhalaman; $i++) {
+                    if ($i != $halaman) {
+                        echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
+                    } else {
+                        echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
+                    }
+                }
+                ?>
+            </ul>
+        </nav>
         <!-- Button trigger modal -->
     </main>
     </div>
