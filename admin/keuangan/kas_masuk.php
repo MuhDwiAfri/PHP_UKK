@@ -14,8 +14,13 @@ if (isset($_GET['cari'])) {
                 '%$cari'
             ";
 }
-
-
+if (isset($_POST['filter'])) {
+    $dari_tgl = mysqli_real_escape_string($conn, $_POST['dari_tgl']);
+    $sampai_tgl = mysqli_real_escape_string($conn, $_POST['sampai_tgl']);
+    $filter = mysqli_query($conn, "SELECT * FROM kas_masuk WHERE tanggal_masuk BETWEEN '$dari_tgl' AND '$sampai_tgl'");
+} else {
+    $filter = mysqli_query($conn, "SELECT * FROM kas_masuk");
+}
 $result = mysqli_query($conn, $query);
 $rows = [];
 
@@ -66,7 +71,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <body>
     <?php include '../sidebar.php' ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h5 class="center" style="text-transform: uppercase;">Dana Pemasukkan</h5>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -82,6 +87,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
         <p class="text-center">Warga RT 13</p>
+
         <?php
         include '../config.php';
         $sql3 = mysqli_query($conn, "SELECT SUM(jumlah) FROM kas_masuk");
@@ -96,6 +102,82 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
         ?>
         <br>
+        <form method="post" action="kas_masuk.php">
+            <label for="tanggal_awal">Tanggal Awal:</label>
+            <input type="date" name="tanggal_awal" id="tanggal_awal">
+
+            <label for="tanggal_akhir">Tanggal Akhir:</label>
+            <input type="date" name="tanggal_akhir" id="tanggal_akhir">
+
+            <input type="submit" name="submit" value="Tampilkan">
+        </form>
+
+        <?php
+        // Cek apakah tombol submit telah ditekan
+        if (isset($_POST['submit'])) {
+            // Ambil nilai tanggal awal dan akhir dari input form atau variabel lainnya
+            $tanggal_awal = $_POST['tanggal_awal'];
+            $tanggal_akhir = $_POST['tanggal_akhir'];
+
+            // Buat koneksi ke database Anda
+            $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
+
+            // Validasi input pengguna
+            if (!$koneksi) {
+                die('Koneksi gagal: ' . mysqli_connect_error());
+            }
+
+            // Buat format tanggal keuangan dari tanggal awal dan akhir
+            $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+            $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+            // Buat query SQL untuk mengambil data dari tabel transaksi pada range tanggal yang telah diformat
+            $query = "SELECT *
+                  FROM kas_masuk
+                  WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
+
+            // Jalankan query dan simpan hasilnya dalam variabel
+            $result = mysqli_query($koneksi, $query);
+
+            // Tampilkan hasil query dan hitung total uang
+            if (mysqli_num_rows($result) > 0) {
+                echo "<table>";
+                echo "<tr>
+                <th>ID</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Jumlah</th>
+                <th>Sumber</th>
+                </tr>";
+
+                $total_uang = 0;
+
+                while ($row = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id_masuk'] . "</td>";
+                    echo "<td>" . date('d M Y', strtotime($row['tanggal_masuk'])) . "</td>";
+                    echo "<td>" . $row['keterangan'] . "</td>";
+                    echo "<td>" . $row['jumlah'] . "</td>";
+                    echo "<td>" . $row['sumber'] . "</td>";
+                    echo "</tr>";
+
+                    $total_uang += $row['jumlah'];
+                }
+
+                echo "<tr>";
+                echo "<td colspan='2' style='text-align: right;'>Total Uang:</td>";
+                echo "<td>" . $total_uang . "</td>";
+                echo "</tr>";
+
+                echo "</table>";
+            } else {
+                echo "Tidak ada data yang ditemukan.";
+            }
+
+            // Tutup koneksi ke database Anda
+            mysqli_close($koneksi);
+        }
+        ?>
         <div class="bd-highlight mb-3 row">
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="./add_masuk.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
@@ -120,32 +202,49 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <th class="text-center">Jumlah</th>
                     <th class="text-center">Aksi</th>
                 </thead>
+                <tbody>
 
-                <?php
+                    <?php
 
-                include "../config.php";
-                $batas   = 5;
-                $halaman = @$_GET['halaman'];
-                if (empty($halaman)) {
-                    $posisi  = 0;
-                    $halaman = 1;
-                } else {
-                    $posisi  = ($halaman - 1) * $batas;
-                }
-                $no = $posisi + 1;
-                $sql = "select * from kas_masuk WHERE 
-                        sumber LIKE '%" . @$cari . "%' OR
+                    include "../config.php";
+                    $batas   = 5;
+                    $halaman = @$_GET['halaman'];
+                    if (empty($halaman)) {
+                        $posisi  = 0;
+                        $halaman = 1;
+                    } else {
+                        $posisi  = ($halaman - 1) * $batas;
+                    }
+                    $no = $posisi + 1;
+
+                    if (isset($_POST['submit'])) {
+                        // Ambil nilai tanggal awal dan akhir dari input form atau variabel lainnya
+                        $tanggal_awal = $_POST['tanggal_awal'];
+                        $tanggal_akhir = $_POST['tanggal_akhir'];
+
+                        // Buat format tanggal keuangan dari tanggal awal dan akhir
+                        $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+                        $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+                        $sql = "select * from kas_masuk WHERE 
+                        (sumber LIKE '%" . @$cari . "%' OR
                         keterangan LIKE '%" . @$cari . "%' OR
                         jumlah LIKE '%" . @$cari . "%' 
-                        '%" . @$cari . "%' 
+                        '%" . @$cari . "%') AND tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'
                         order by id_masuk desc limit $posisi,$batas";
-                $hasil = mysqli_query($conn, $sql);
-                $i = 0;
-                while ($orang = mysqli_fetch_array($hasil)) {
-                ?>
-                    <tbody>
-                        <?php // foreach ($rows as $i => $orang) : 
-                        ?>
+                    } else {
+                        $sql = "select * from kas_masuk WHERE 
+                            sumber LIKE '%" . @$cari . "%' OR
+                            keterangan LIKE '%" . @$cari . "%' OR
+                            jumlah LIKE '%" . @$cari . "%' 
+                            '%" . @$cari . "%'
+                            order by id_masuk desc limit $posisi,$batas";
+                    }
+
+                    $hasil = mysqli_query($conn, $sql);
+                    $i = 0;
+                    while ($orang = mysqli_fetch_array($hasil)) {
+                    ?>
                         <tr>
                             <td align="center"><?= $posisi + $i + 1 ?></td>
                             <td align=""><?= $orang['sumber'] ?></td>
@@ -153,7 +252,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <td align="center"><?= $orang['tanggal_masuk'] ?></td>
                             <td align="center"> Rp. <?= number_format($orang['jumlah'], 0, ',', '.') ?></td>
                             <td class="button">
-                                <div class="d-flex flex-nowrap gap-2">
+                                <div class="d-flex flex-nowrap gap-2 justify-content-center">
                                     <!-- Detail Modal-->
                                     <!-- Modal Start -->
                                     <button type="button" class="btn btn-outline-primary bi bi-info-circle" data-bs-toggle="modal" data-bs-target="#ModalViewData<?php echo $orang['id_masuk'] ?>"></button>
@@ -202,13 +301,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 </div>
                             </td>
                         </tr>
-                        <?php //endforeach; 
-                        ?>
-                    </tbody>
-                <?php
-                    $i++;
-                }
-                ?>
+                    <?php
+                        $i++;
+                    }
+                    ?>
+                </tbody>
             </table>
             <hr>
         </div>
@@ -224,9 +321,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <?php
                 for ($i = 1; $i <= $jmlhalaman; $i++) {
                     if ($i != $halaman) {
-                        echo "<li class='page-item'><a class='page-link' href='index.php?halaman=$i' >$i</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='kas_masuk.php?halaman=$i' >$i</a></li>";
                     } else {
-                        echo "<li class='page-item active'><a class='page-link' href='index.php'>$i</a></li>";
+                        echo "<li class='page-item active'><a class='page-link' href='kas_masuk.php'>$i</a></li>";
                     }
                 }
                 ?>
@@ -238,7 +335,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-    <script src="./assets/hias/dashboard.js"></script>
+    <!-- <script src="./assets/hias/dashboard.js"></script> -->
+    <!-- <script src="./assets/js/custom.js"></script> -->
     <script>
         setInterval(() => {
             const waktu = new Date();

@@ -15,6 +15,12 @@ if (isset($_GET['cari'])) {
             ";
 }
 
+// if (isset($_GET['kirim'])) {
+//     $tglm = $_POST['tglm'];
+//     $tgls = $_POST['tgls'];
+
+//     $ambil = $conn->query("SELECT * FROM")
+// }
 
 $result = mysqli_query($conn, $query);
 $rows = [];
@@ -115,30 +121,29 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <th class="text-center">Jumlah</th>
                     <th class="text-center">Aksi</th>
                 </thead>
+                <tbody>
+                    <?php
 
-                <?php
-
-                include "../config.php";
-                $batas   = 5;
-                $halaman = @$_GET['halaman'];
-                if (empty($halaman)) {
-                    $posisi  = 0;
-                    $halaman = 1;
-                } else {
-                    $posisi  = ($halaman - 1) * $batas;
-                }
-                $no = $posisi + 1;
-                $sql = "select * from kas_keluar WHERE 
+                    include "../config.php";
+                    $batas   = 5;
+                    $halaman = @$_GET['halaman'];
+                    if (empty($halaman)) {
+                        $posisi  = 0;
+                        $halaman = 1;
+                    } else {
+                        $posisi  = ($halaman - 1) * $batas;
+                    }
+                    $no = $posisi + 1;
+                    $sql = "select * from kas_keluar WHERE 
                         sumber LIKE '%" . @$cari . "%' OR
                         keterangan LIKE '%" . @$cari . "%' OR
                         jumlah LIKE '%" . @$cari . "%' 
                         '%" . @$cari . "%' 
                         order by id_keluar desc limit $posisi,$batas";
-                $hasil = mysqli_query($conn, $sql);
-                $i = 0;
-                while ($orang = mysqli_fetch_array($hasil)) {
-                ?>
-                    <tbody>
+                    $hasil = mysqli_query($conn, $sql);
+                    $i = 0;
+                    while ($orang = mysqli_fetch_array($hasil)) {
+                    ?>
                         <?php // foreach ($rows as $i => $orang) : 
                         ?>
                         <tr>
@@ -148,7 +153,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <td align="center"><?= $orang['tanggal_keluar'] ?></td>
                             <td align="center"> Rp. <?= number_format($orang['jumlah'], 0, ',', '.') ?></td>
                             <td class="button">
-                                <div class="d-flex flex-nowrap gap-2">
+                                <div class="d-flex flex-nowrap gap-2 justify-content-center">
                                     <!-- Detail Modal-->
                                     <!-- Modal Start -->
                                     <button type="button" class="btn btn-outline-primary bi bi-info-circle" data-bs-toggle="modal" data-bs-target="#ModalViewData<?php echo $orang['id_keluar'] ?>"></button>
@@ -186,24 +191,24 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     </div>
                                     <!-- Modal End -->
 
-                                    <div class="vr mx-2 bg-dark" style="width:1px;"></div>
+                                    <!-- <div class="vr mx-2 bg-dark" style="width:1px;"></div>
                                     <a class='btn btn-outline-warning' href='update_keluar.php?id_keluar=<?= $orang['id_keluar'] ?>'>
                                         <i class='bi bi-pencil-square'></i>
-                                    </a>
-                                    <div class="vr mx-2 bg-dark" style="width:1px;"></div>
+                                    </a> -->
+                                    <!-- <div class="vr mx-2 bg-dark" style="width:1px;"></div>
                                     <a class='btn btn-outline-danger' href='delete_keluar.php?id_keluar=<?= $orang['id_keluar'] ?>' onclick="return confirm('Apakah anda yakin ingin menghapus ini ?')">
                                         <i class='bi bi-trash'></i>
                                     </a>
-                                </div>
+                                </div> -->
                             </td>
                         </tr>
                         <?php //endforeach; 
                         ?>
-                    </tbody>
-                <?php
-                    $i++;
-                }
-                ?>
+                    <?php
+                        $i++;
+                    }
+                    ?>
+                </tbody>
             </table>
             <hr>
             <?php

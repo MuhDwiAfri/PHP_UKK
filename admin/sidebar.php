@@ -3,12 +3,13 @@
     <button class="navbar-toggler d-md-none collapsed mx-2 " type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="btn-group dropstart ms-auto" style="margin-right: 17px;">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-gear-fill"></i> Pengaturan
+    <div class="btn-group  ms-auto" style="margin-right: 17px;">
+        <button class="btn btn-primary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- <i class="bi bi-gear-fill"></i> Pengaturan -->
+            Pengaturan
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Pengaturan</a></li>
+            <li><a class="dropdown-item" href="../..//admin/profil.php">Pengaturan</a></li>
             <li><a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Keluar</a></li>
         </ul>
     </div>

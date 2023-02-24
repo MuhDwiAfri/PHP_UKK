@@ -54,19 +54,19 @@ if (isset($_POST['submit'])) {
             <h1 class="text-center p-3">Register</h1>
             <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Example">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Example" required>
             </div>
             <div class="mb-3">
                 <label for="username" class="form-label">User name</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Example1000">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Example1000" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Example@gmail.com">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Example@gmail.com" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="123Example">
+                <input type="password" name="password" class="form-control" id="password" placeholder="123Example" required>
             </div>
             <div class="mb-1">
                 <label class="form-label">Role :</label>

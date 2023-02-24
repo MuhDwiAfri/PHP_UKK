@@ -76,7 +76,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
     <!-- <div class="container" href="../login/index.php"></div> -->
     <?php include '../sidebar.php' ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?= $_SESSION['role']; ?> <?php echo $_SESSION['username']; ?> <? ?></h5>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -194,7 +194,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <?php
         include '../config.php';
 
-        $query = "SELECT * FROM laporan where id=2";
+        $query = "SELECT * FROM laporan order by id desc limit 1";
         $result = mysqli_query($conn, $query);
         $rows = [];
 

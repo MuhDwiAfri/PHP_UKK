@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 <body>
     <?php include '../sidebar.php' ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h5 class="center" style="text-transform: uppercase;">Dana pengeluaran</h5>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -120,32 +120,30 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <th class="text-center">Jumlah</th>
                     <th class="text-center">Aksi</th>
                 </thead>
+                <tbody>
 
-                <?php
+                    <?php
 
-                include "../config.php";
-                $batas   = 5;
-                $halaman = @$_GET['halaman'];
-                if (empty($halaman)) {
-                    $posisi  = 0;
-                    $halaman = 1;
-                } else {
-                    $posisi  = ($halaman - 1) * $batas;
-                }
-                $no = $posisi + 1;
-                $sql = "select * from kas_keluar WHERE 
+                    include "../config.php";
+                    $batas   = 5;
+                    $halaman = @$_GET['halaman'];
+                    if (empty($halaman)) {
+                        $posisi  = 0;
+                        $halaman = 1;
+                    } else {
+                        $posisi  = ($halaman - 1) * $batas;
+                    }
+                    $no = $posisi + 1;
+                    $sql = "select * from kas_keluar WHERE 
                         sumber LIKE '%" . @$cari . "%' OR
                         keterangan LIKE '%" . @$cari . "%' OR
                         jumlah LIKE '%" . @$cari . "%' 
                         '%" . @$cari . "%' 
                         order by id_keluar desc limit $posisi,$batas";
-                $hasil = mysqli_query($conn, $sql);
-                $i = 0;
-                while ($orang = mysqli_fetch_array($hasil)) {
-                ?>
-                    <tbody>
-                        <?php // foreach ($rows as $i => $orang) : 
-                        ?>
+                    $hasil = mysqli_query($conn, $sql);
+                    $i = 0;
+                    while ($orang = mysqli_fetch_array($hasil)) {
+                    ?>
                         <tr>
                             <td align="center"><?= $posisi + $i + 1 ?></td>
                             <td align=""><?= $orang['sumber'] ?></td>
@@ -153,7 +151,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <td align="center"><?= $orang['tanggal_keluar'] ?></td>
                             <td align="center"> Rp. <?= number_format($orang['jumlah'], 0, ',', '.') ?></td>
                             <td class="button">
-                                <div class="d-flex flex-nowrap gap-2">
+                                <div class="d-flex flex-nowrap gap-2 justify-content-center">
                                     <!-- Detail Modal-->
                                     <!-- Modal Start -->
                                     <button type="button" class="btn btn-outline-primary bi bi-info-circle" data-bs-toggle="modal" data-bs-target="#ModalViewData<?php echo $orang['id_keluar'] ?>"></button>
@@ -204,11 +202,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                         </tr>
                         <?php //endforeach; 
                         ?>
-                    </tbody>
-                <?php
-                    $i++;
-                }
-                ?>
+                    <?php
+                        $i++;
+                    }
+                    ?>
+                </tbody>
             </table>
             <hr>
         </div>

@@ -1,5 +1,6 @@
 <?php
 include "../config.php";
+
 ?>
 
 <!doctype html>
@@ -43,8 +44,7 @@ include "../config.php";
 
 <body>
     <?php include '../sidebar.php' ?>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Tambah Data </h1>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -89,9 +89,20 @@ include "../config.php";
                       VALUES ( '$nama', '$telp', '$email')";
 
         $queryInsert = mysqli_query($conn, $sqlInsert);
-        echo "<script>location.href='index.php';</script>";
-    } else {
-        echo "Data Berhasil Ditambah";
+
+        if (mysqli_affected_rows($conn) > 0) {
+            echo "<script>
+                    alert('data berhasil ditambahkan!');
+                    document.location.href = 'index.php';
+    			</script>
+		        ";
+        } else {
+            echo "<script>
+                    alert('data gagal ditambahkan!');
+                    document.location.href = 'index.php';
+    			</script>
+		        ";
+        }
     }
     ?>
 

@@ -91,9 +91,9 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
     <!-- <div class="container" href="../login/index.php"></div> -->
     <?php include '../sidebar.php' ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="center" style="text-transform: uppercase;">Selamat Datang, <?= $_SESSION['role']; ?> <?php echo $_SESSION['username']; ?> <? ?></h5>
+            <h5 style="text-transform: uppercase;">Selamat Datang, <?= $_SESSION['role']; ?> <?php echo $_SESSION['username']; ?> <? ?></h5>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2"></div>
             </div>
@@ -280,20 +280,23 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
             </div>
         </div>
         <!-- <a class="btn btn-primary" href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=ukk">Menambahkan Ke database</a> -->
-        <div class="col-lg-5 mt-3">
-            <?php foreach ($rows as $key => $laporan) : ?>
-                <div class="card shadow mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h6 class="d-flex justify-content-between">
-                            <span>Laporan <?= $key + 1 ?></span>
-                            <span><?= $laporan['tgl_laporan'] ?></span>
-                        </h6>
+
+        <div class="row gx-3">
+            <div class="col-xl-5 col-md-12 mb-4 mt-3">
+                <?php foreach ($rows as $key => $laporan) : ?>
+                    <div class="card shadow mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="d-flex justify-content-between">
+                                <span>Kegiatan <?= $key + 1 ?></span>
+                                <span><?= $laporan['tgl_laporan'] ?></span>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <p class="m-0"><?= $laporan['info'] ?></p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="m-0"><?= $laporan['info'] ?></p>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </main>
 

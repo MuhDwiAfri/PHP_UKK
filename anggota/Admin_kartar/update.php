@@ -50,7 +50,7 @@ $data = mysqli_fetch_assoc($result);
 
     <?php include '../sidebar.php' ?>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 px-3">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Edit Data : <?= $data['nama_admin'] ?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
