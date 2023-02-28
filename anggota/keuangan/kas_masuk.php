@@ -34,6 +34,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -95,6 +96,45 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
         ?>
         <br>
+
+        <?php
+        if (isset($_POST['submit'])) {
+            $tanggal_awal = $_POST['tanggal_awal'];
+            $tanggal_akhir = $_POST['tanggal_akhir'];
+
+            $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
+
+            if (!$koneksi) {
+                die('Koneksi gagal: ' . mysqli_connect_error());
+            }
+
+            $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+            $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+            $query = "SELECT *
+                  FROM kas_masuk
+                  WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
+
+            $result = mysqli_query($koneksi, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+
+                $total_uang = 0;
+
+                while ($row = mysqli_fetch_array($result)) {
+                    $total_uang += $row['jumlah'];
+                }
+
+                echo "<h6 style='justify-content: start;'>Total Uang dari tanggal " . $tanggal_awal . " s/d " . $tanggal_akhir . "</h6>";
+                echo "<p class='text-'>Rp. " .  number_format($total_uang)  . "</p>";
+            } else {
+                echo "<div class='text-center'>Tidak ada data yang ditemukan.</div>";
+            }
+
+            mysqli_close($koneksi);
+        }
+        ?>
+
         <div class="bd-highlight mb-3 row">
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="./add_masuk.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
@@ -108,6 +148,17 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
         <!-- <h3>Total : </h3> -->
         <p class="text-center"><b>Total Data : </b><?php echo mysqli_num_rows($result) ?></p>
+
+        <form method="post" action="kas_masuk.php">
+            <div class="input-group mb-3">
+                <span for="tanggal_awal" class="input-group-text">Tanggal</span>
+                <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control">
+                <span for="tanggal_akhir" class="input-group-text">s/d</span>
+                <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
+                <!-- <input class="btn btn-info ms-3" name="submit" type="submit" > -->
+                <button class="btn btn-info ms-3" style="color: white;" name="submit" type="submit"><i class="bi bi-funnel"></i></button>
+            </div>
+        </form>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered  table-sm" style="box-shadow: 0px 1px 6px 0.5px black;">
@@ -132,12 +183,27 @@ while ($row = mysqli_fetch_assoc($result)) {
                         $posisi  = ($halaman - 1) * $batas;
                     }
                     $no = $posisi + 1;
-                    $sql = "select * from kas_masuk WHERE 
-                        sumber LIKE '%" . @$cari . "%' OR
+                    if (isset($_POST['submit'])) {
+                        $tanggal_awal = $_POST['tanggal_awal'];
+                        $tanggal_akhir = $_POST['tanggal_akhir'];
+
+                        $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+                        $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+                        $sql = "select * from kas_masuk WHERE 
+                        (sumber LIKE '%" . @$cari . "%' OR
                         keterangan LIKE '%" . @$cari . "%' OR
                         jumlah LIKE '%" . @$cari . "%' 
-                        '%" . @$cari . "%' 
+                        '%" . @$cari . "%') AND tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'
                         order by id_masuk desc limit $posisi,$batas";
+                    } else {
+                        $sql = "select * from kas_masuk WHERE 
+                            sumber LIKE '%" . @$cari . "%' OR
+                            keterangan LIKE '%" . @$cari . "%' OR
+                            jumlah LIKE '%" . @$cari . "%' 
+                            '%" . @$cari . "%'
+                            order by id_masuk desc limit $posisi,$batas";
+                    }
                     $hasil = mysqli_query($conn, $sql);
                     $i = 0;
                     while ($orang = mysqli_fetch_array($hasil)) {

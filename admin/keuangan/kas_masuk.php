@@ -14,18 +14,43 @@ if (isset($_GET['cari'])) {
                 '%$cari'
             ";
 }
-if (isset($_POST['filter'])) {
-    $dari_tgl = mysqli_real_escape_string($conn, $_POST['dari_tgl']);
-    $sampai_tgl = mysqli_real_escape_string($conn, $_POST['sampai_tgl']);
-    $filter = mysqli_query($conn, "SELECT * FROM kas_masuk WHERE tanggal_masuk BETWEEN '$dari_tgl' AND '$sampai_tgl'");
-} else {
-    $filter = mysqli_query($conn, "SELECT * FROM kas_masuk");
-}
+// if (isset($_POST['filter'])) {
+//     $dari_tgl = mysqli_real_escape_string($conn, $_POST['dari_tgl']);
+//     $sampai_tgl = mysqli_real_escape_string($conn, $_POST['sampai_tgl']);
+//     $filter = mysqli_query($conn, "SELECT * FROM kas_masuk WHERE tanggal_masuk BETWEEN '$dari_tgl' AND '$sampai_tgl'");
+// } else {
+//     $filter = mysqli_query($conn, "SELECT * FROM kas_masuk");
+// }
 $result = mysqli_query($conn, $query);
 $rows = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
+}
+
+if (isset($_POST['submit'])) {
+    $tanggal_awal = $_POST['tanggal_awal'];
+    $tanggal_akhir = $_POST['tanggal_akhir'];
+
+    // buat url cetak
+    $url_cetak = "export_masuk.php?tgl_awal=" . $tanggal_awal . "&tgl_akhir=" . $tanggal_akhir . "&filter=true";
+
+    $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
+
+    if (!$koneksi) {
+        die('Koneksi gagal: ' . mysqli_connect_error());
+    }
+
+    $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+    $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+    $query = "SELECT *
+          FROM kas_masuk
+          WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
+
+    $result = mysqli_query($koneksi, $query);
+
+    mysqli_close($koneksi);
 }
 
 ?>
@@ -82,7 +107,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </div>
                 <div class="btn-group me-2">
                     <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
-                    <a href="export_masuk.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
+                    <a href="<?= $url_cetak ?? 'export_masuk.php' ?>" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
                 </div>
             </div>
         </div>
@@ -93,91 +118,33 @@ while ($row = mysqli_fetch_assoc($result)) {
         $sql3 = mysqli_query($conn, "SELECT SUM(jumlah) FROM kas_masuk");
         while ($data3 = mysqli_fetch_array($sql3)) {
         ?><tr>
-                <h3>Total Pemasukkan
-
-                </h3></a>
+                <h3>Seluruh Pemasukkan</h3>
                 <h6 style="color: green;"><?php echo "Rp. " . number_format($data3['SUM(jumlah)']); ?></h6>
             </tr>
         <?php
         }
         ?>
         <br>
-        <form method="post" action="kas_masuk.php">
-            <label for="tanggal_awal">Tanggal Awal:</label>
-            <input type="date" name="tanggal_awal" id="tanggal_awal">
-
-            <label for="tanggal_akhir">Tanggal Akhir:</label>
-            <input type="date" name="tanggal_akhir" id="tanggal_akhir">
-
-            <input type="submit" name="submit" value="Tampilkan">
-        </form>
 
         <?php
-        // Cek apakah tombol submit telah ditekan
         if (isset($_POST['submit'])) {
-            // Ambil nilai tanggal awal dan akhir dari input form atau variabel lainnya
-            $tanggal_awal = $_POST['tanggal_awal'];
-            $tanggal_akhir = $_POST['tanggal_akhir'];
-
-            // Buat koneksi ke database Anda
-            $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
-
-            // Validasi input pengguna
-            if (!$koneksi) {
-                die('Koneksi gagal: ' . mysqli_connect_error());
-            }
-
-            // Buat format tanggal keuangan dari tanggal awal dan akhir
-            $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
-            $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
-
-            // Buat query SQL untuk mengambil data dari tabel transaksi pada range tanggal yang telah diformat
-            $query = "SELECT *
-                  FROM kas_masuk
-                  WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
-
-            // Jalankan query dan simpan hasilnya dalam variabel
-            $result = mysqli_query($koneksi, $query);
-
-            // Tampilkan hasil query dan hitung total uang
             if (mysqli_num_rows($result) > 0) {
-                echo "<table>";
-                echo "<tr>
-                <th>ID</th>
-                <th>Tanggal</th>
-                <th>Keterangan</th>
-                <th>Jumlah</th>
-                <th>Sumber</th>
-                </tr>";
 
                 $total_uang = 0;
 
                 while ($row = mysqli_fetch_array($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id_masuk'] . "</td>";
-                    echo "<td>" . date('d M Y', strtotime($row['tanggal_masuk'])) . "</td>";
-                    echo "<td>" . $row['keterangan'] . "</td>";
-                    echo "<td>" . $row['jumlah'] . "</td>";
-                    echo "<td>" . $row['sumber'] . "</td>";
-                    echo "</tr>";
-
                     $total_uang += $row['jumlah'];
                 }
 
-                echo "<tr>";
-                echo "<td colspan='2' style='text-align: right;'>Total Uang:</td>";
-                echo "<td>" . $total_uang . "</td>";
-                echo "</tr>";
-
-                echo "</table>";
+                echo "<h6 style='justify-content: start;'>Total Uang dari tanggal " . $tanggal_awal . " s/d " . $tanggal_akhir . "</h6>";
+                echo "<p class='text-'>Rp. " .  number_format($total_uang)  . "</p>";
             } else {
-                echo "Tidak ada data yang ditemukan.";
+                echo "<div class='text-center'>Tidak ada data yang ditemukan.</div>";
             }
-
-            // Tutup koneksi ke database Anda
-            mysqli_close($koneksi);
         }
+
         ?>
+
         <div class="bd-highlight mb-3 row">
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="./add_masuk.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
@@ -191,6 +158,18 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
         <!-- <h3>Total : </h3> -->
         <p class="text-center"><b>Total Data : </b><?php echo mysqli_num_rows($result) ?></p>
+
+        <form method="post" action="kas_masuk.php">
+            <div class="input-group mb-3">
+                <span for="tanggal_awal" class="input-group-text">Tanggal</span>
+                <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control">
+                <span for="tanggal_akhir" class="input-group-text">s/d</span>
+                <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
+                <!-- <input class="btn btn-info ms-3" name="submit" type="submit" > -->
+                <button class="btn btn-info ms-3" style="color: white;" name="submit" type="submit"><i class="bi bi-funnel"></i></button>
+            </div>
+        </form>
+
 
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered  table-sm" style="box-shadow: 0px 1px 6px 0.5px black;">
@@ -218,11 +197,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                     $no = $posisi + 1;
 
                     if (isset($_POST['submit'])) {
-                        // Ambil nilai tanggal awal dan akhir dari input form atau variabel lainnya
                         $tanggal_awal = $_POST['tanggal_awal'];
                         $tanggal_akhir = $_POST['tanggal_akhir'];
 
-                        // Buat format tanggal keuangan dari tanggal awal dan akhir
                         $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
                         $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
 
@@ -307,6 +284,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                 </tbody>
             </table>
+
             <hr>
         </div>
         <?php

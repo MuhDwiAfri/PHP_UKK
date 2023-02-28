@@ -8,9 +8,8 @@
             <!-- <i class="bi bi-gear-fill"></i> Pengaturan -->
             Pengaturan
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="../..//admin/profil.php">Pengaturan</a></li>
-            <li><a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">Keluar</a></li>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')"><i class="bi bi-box-arrow-left"></i> Keluar</a></li>
         </ul>
     </div>
 </header>
