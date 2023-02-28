@@ -23,7 +23,33 @@ while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
 }
 
+if (isset($_POST['submit'])) {
+    $tanggal_awal = $_POST['tanggal_awal'];
+    $tanggal_akhir = $_POST['tanggal_akhir'];
+
+    // buat url cetak
+    $url_cetak = "export_masuk.php?tgl_awal=" . $tanggal_awal . "&tgl_akhir=" . $tanggal_akhir . "&filter=true";
+
+    $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
+
+    if (!$koneksi) {
+        die('Koneksi gagal: ' . mysqli_connect_error());
+    }
+
+    $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+    $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+
+    $query = "SELECT *
+          FROM kas_masuk
+          WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
+
+    $result = mysqli_query($koneksi, $query);
+
+    mysqli_close($koneksi);
+}
+
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -77,7 +103,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </div>
                 <div class="btn-group me-2">
                     <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
-                    <a href="export_masuk.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
+                    <a href="<?= $url_cetak ?? 'export_masuk.php' ?>" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
                 </div>
             </div>
         </div>
@@ -99,24 +125,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 
         <?php
         if (isset($_POST['submit'])) {
-            $tanggal_awal = $_POST['tanggal_awal'];
-            $tanggal_akhir = $_POST['tanggal_akhir'];
-
-            $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
-
-            if (!$koneksi) {
-                die('Koneksi gagal: ' . mysqli_connect_error());
-            }
-
-            $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
-            $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
-
-            $query = "SELECT *
-                  FROM kas_masuk
-                  WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
-
-            $result = mysqli_query($koneksi, $query);
-
             if (mysqli_num_rows($result) > 0) {
 
                 $total_uang = 0;
@@ -130,9 +138,8 @@ while ($row = mysqli_fetch_assoc($result)) {
             } else {
                 echo "<div class='text-center'>Tidak ada data yang ditemukan.</div>";
             }
-
-            mysqli_close($koneksi);
         }
+
         ?>
 
         <div class="bd-highlight mb-3 row">

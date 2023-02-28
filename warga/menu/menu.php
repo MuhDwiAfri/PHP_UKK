@@ -41,6 +41,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -188,7 +189,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         <?php
         include '../config.php';
 
-        $query = "SELECT * FROM laporan where id=2";
+        $query = "SELECT * FROM laporan order by id desc limit 1";
         $result = mysqli_query($conn, $query);
         $rows = [];
 
@@ -197,7 +198,6 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
         }
 
         ?>
-
         <?php
 
         if (isset($_POST['submit'])) {

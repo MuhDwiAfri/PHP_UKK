@@ -25,9 +25,9 @@
 <body>
     <?php
     // Load file koneksi.php
-    $host = 'localhost'; // Nama hostnya
-    $username = 'root'; // Username
-    $password = ''; // Password (Isi jika menggunakan password)
+    $host = 'localhost';
+    $username = 'root';
+    $password = '';
     $database = 'ukk';
 
     $pdo = new PDO('mysql:host=' . $host . ';dbname=' . $database, $username, $password);
@@ -39,12 +39,11 @@
         $query = "SELECT * FROM kas_masuk";
 
         $label = "Semua Data Pemasukan";
-    } else { // Jika terisi
-        // Buat query untuk menampilkan data transaksi sesuai periode tanggal
+    } else {
         $query = "SELECT * FROM kas_masuk WHERE (tanggal_masuk BETWEEN '" . $tgl_awal . "' AND '" . $tgl_akhir . "')";
 
-        $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-        $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+        $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
+        $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
         $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
     }
     ?>

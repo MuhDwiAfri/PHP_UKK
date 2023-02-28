@@ -46,6 +46,10 @@ $pemasukan = mysqli_fetch_assoc($result_pemasukan);
 $result_pengeluaran = mysqli_query($conn, "SELECT SUM(jumlah) AS 'total' FROM kas_keluar");
 $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
 
+// $sisa = $pemasukan['total'] - $pengeluaran['total'];
+// $jumlahminggu = 4;
+// $sisa_keuangan_perminggu = $sisa / $jumlahminggu;
+// echo  "Rp. " . number_format($sisa_keuangan_perminggu,  0, ".", ".");
 ?>
 
 <!doctype html>
@@ -100,7 +104,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
             <!-- <div class="btn-group me-2">
                 <a href="export_all.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
             </div> -->
-            <div class="dropdown">
+            <!-- <div class="dropdown">
                 <button class="btn btn-outline-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Export data
                 </button>
@@ -110,7 +114,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                     <hr>
                     <li><a class="dropdown-item" href="cetak.php"><i class="bi bi-printer-fill"></i> Cetak Print</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
             <div class="row ">
@@ -188,9 +192,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                         </div>
                         <!-- <div class="container mb-2 text-white">&nbsp Mingguan : Rp.</div> -->
                         <div class="container mb-2 text-white">SISA UANG KESELURUHAN </div>
-                        <!-- <?php
-                                echo number_format($jumlahmasuk, 2, ',', '.');
-                                ?> -->
+
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-12 mb-4">

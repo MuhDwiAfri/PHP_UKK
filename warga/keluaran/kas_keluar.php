@@ -40,6 +40,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -99,7 +100,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <br>
         <div class="bd-highlight mb-3 row">
             <div class="col-12 col-md-auto p-2 bd-highlight">
-                <a href="./add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
+                <!-- <a href="./add.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a> -->
             </div>
             <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
                 <form method="GET" action="kas_keluar.php" class="d-flex">

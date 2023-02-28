@@ -41,6 +41,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
+    <link rel="icon" href="../gambar/Rt.png">
     <title>Kartar Page</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -82,9 +83,9 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2"></div>
             </div>
-            <div class="btn-group me-2">
+            <!-- <div class="btn-group me-2">
                 <a href="export_all.php" class="btn btn-sm btn-outline-secondary"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a>
-            </div>
+            </div> -->
         </div>
         <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3 mb-3 border-bottom">
             <div class="row ">
