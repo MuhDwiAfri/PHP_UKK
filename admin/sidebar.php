@@ -9,7 +9,15 @@
             Pengaturan
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')"><i class="bi bi-box-arrow-left"></i> Keluar</a></li>
+            <li>
+                <a class="dropdown-item" href="../../admin/menu/profil.php">
+                    <i class="bi bi-person-circle"> </i> Edit Profil
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="../../login/logout.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')">
+                    <i class="bi bi-box-arrow-left"></i> Keluar</a>
+            </li>
         </ul>
     </div>
 </header>
@@ -80,7 +88,7 @@
                         </a>
                     </h6> -->
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-white">
-                        <span>Transaksi</span>
+                        <span>Transaksi Seluruh</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                             <span class="text-white" data-feather="plus-circle"></span>
                         </a>
@@ -95,6 +103,24 @@
                         <a class="nav-link text-white" href="../keluaran/kas_keluar.php">
                             <i class="bi bi-wallet2"></i>
                             Pengeluaran
+                        </a>
+                    </li>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-white">
+                        <span>Transaksi Bulanan</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span class="text-white" data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../keuangan bulan/kas_masuk_bulan.php">
+                            <i class="bi bi-layers"></i>
+                            Pemasukkan Bulanan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../keluaran/kas_keluar.php">
+                            <i class="bi bi-wallet2"></i>
+                            Pengeluaran Bulanan
                         </a>
                     </li>
                 </ul>

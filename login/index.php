@@ -23,11 +23,17 @@
 				<label for="password" class="form-label">Password</label>
 				<input type="password" name="password" class="form-control" id="password" required>
 			</div>
+			<div>
+				<span class="tombol">Tidak punya akun? <a href="register.php" style="text-decoration: none;">Register</a></span>
+			</div>
+			<div>
+				<span class="tombol">Lupa akun? <a href="./lupapw/reset_pw.php" style="text-decoration: none;">Lupa Password</a></span>
+			</div>
 
-			<span class="tombol">Tidak punya akun? <a href="register.php" style="text-decoration: none;">Register</a></span>
 			<div>
 				<input type="submit" class="tombol_login" value="LOGIN">
 			</div>
+			<!-- <p class="tombol">Sudah ada akun tapi lupa?<a href="./forgot_password/forgot.php" style="text-decoration: none;">Lupa Akun</a></p> -->
 		</form>
 	</div>
 

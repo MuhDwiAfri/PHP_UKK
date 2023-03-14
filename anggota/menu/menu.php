@@ -161,7 +161,7 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2 text-white">&nbsp Mingguan : Rp.</div>
+                        <div class="container mb-2 text-white">SISA UANG KESELURUHAN</div>
                         <!-- <?php
                                 echo number_format($jumlahmasuk, 2, ',', '.');
                                 ?> -->

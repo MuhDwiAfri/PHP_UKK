@@ -149,6 +149,7 @@ if (isset($_POST['submit'])) {
             <div class="col-12 col-md-auto p-2 bd-highlight">
                 <a href="./add_masuk.php" class="btn btn-primary btn-md "><i class="bi bi-plus"></i> Tambah <i class="bi bi-plus"></i></a>
             </div>
+
             <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
                 <form method="GET" action="kas_masuk.php" class="d-flex">
                     <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
@@ -161,12 +162,35 @@ if (isset($_POST['submit'])) {
 
         <form method="post" action="kas_masuk.php">
             <div class="input-group mb-3">
+                <select name="bulan" id="bulan" class="btn btn-success me-2">
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+                <select name="tahun" class="btn btn-warning me-2">
+                    <?php
+                    $mulai = date('Y') - 50;
+                    for ($i = $mulai; $i < $mulai + 100; $i++) {
+                        $sel = $i == date('Y') ? ' selected="selected"' : '';
+                        echo '<option value="' . $i . '"' . $sel . '>' . $i . '</option>';
+                    }
+                    ?>
+                </select>
                 <span for="tanggal_awal" class="input-group-text">Tanggal</span>
                 <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control">
                 <span for="tanggal_akhir" class="input-group-text">s/d</span>
                 <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
                 <!-- <input class="btn btn-info ms-3" name="submit" type="submit" > -->
-                <button class="btn btn-info ms-3" style="color: white;" name="submit" type="submit"><i class="bi bi-funnel"></i></button>
+                <button class="btn btn-info ms-2" style="color: white;" name="submit" type="submit"><i class="bi bi-funnel"></i></button>
             </div>
         </form>
 
@@ -197,6 +221,10 @@ if (isset($_POST['submit'])) {
                     $no = $posisi + 1;
 
                     if (isset($_POST['submit'])) {
+
+                        $bulan = $_POST['bulan'];
+                        $tahun = $_POST['tahun'];
+
                         $tanggal_awal = $_POST['tanggal_awal'];
                         $tanggal_akhir = $_POST['tanggal_akhir'];
 

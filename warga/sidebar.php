@@ -9,6 +9,11 @@
             Pengaturan
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <li>
+                <a class="dropdown-item" href="../../warga/menu/profil.php">
+                    <i class="bi bi-person-circle"> </i> Edit Profil
+                </a>
+            </li>
             <li><a class="dropdown-item" href="../../login/index.php" onclick="return confirm('Apakah anda yakin ingin Keluar ?')"><i class="bi bi-box-arrow-left"></i> Keluar</a></li>
         </ul>
     </div>

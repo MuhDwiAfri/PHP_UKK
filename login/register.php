@@ -2,40 +2,64 @@
 
 require_once '../config.php';
 
-if (isset($_POST['submit'])) {
+// if (isset($_POST['submit'])) {
 
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $name = $_POST['name'];
-    $password = $_POST['password'];
+//     $email = $_POST['email'];
+//     $username = $_POST['username'];
+//     $name = $_POST['name'];
+//     $password = $_POST['password'];
+//     $role = $_POST['role'];
+
+//     $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username'");
+
+//     if (mysqli_fetch_assoc($result)) {
+//         echo "<script>
+// 				    alert('email sudah terdaftar!')
+// 		      </script>";
+//         return false;
+//     }
+
+//     $password = password_hash($password, PASSWORD_DEFAULT);
+
+//     mysqli_query($conn, "INSERT INTO login VALUES('', '$name','$username', '$password', '$role', '$email')");
+
+//     if (mysqli_affected_rows($conn) > 0) {
+//         echo "<script>
+// 				alert('user baru berhasil ditambahkan!');
+//                 header ('location: register.php');
+// 			  </script>";
+
+//         header("location:index.php");
+//     } else {
+//         echo "<script>
+// 				alert('user gagal ditambahkan!');
+// 			  </script>";
+//     }
+// };
+if (isset($_POST['submit'])) {
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $pass = ($_POST['password']);
+    $cpass = ($_POST['cpass']);
     $role = $_POST['role'];
 
-    $result = mysqli_query($conn, "SELECT * FROM login WHERE username = '$username'");
+    $select = "SELECT * FROM login WHERE username = '$username'";
+    $result = mysqli_query($conn, $select);
 
-    if (mysqli_fetch_assoc($result)) {
-        echo "<script>
-				    alert('email sudah terdaftar!')
-		      </script>";
-        return false;
-    }
-
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
-    mysqli_query($conn, "INSERT INTO login VALUES('', '$name','$username', '$password', '$role', '$email')");
-
-    if (mysqli_affected_rows($conn) > 0) {
-        echo "<script>
-				alert('user baru berhasil ditambahkan!');
-                header ('location: register.php');
-			  </script>";
-
-        header("location:index.php");
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>alert('User already registered')</script>";
     } else {
-        echo "<script>
-				alert('user gagal ditambahkan!');
-			  </script>";
+        if ($pass != $cpass) {
+            echo "<script>alert('Password tidak sesuai ')</script>";
+        } else {
+            $password = password_hash($pass, PASSWORD_DEFAULT);
+            $insert = "INSERT INTO login(email, name, username, password, role) VALUES('$email','$name','$username','$password','$role')";
+            mysqli_query($conn, $insert);
+            header('location:index.php');
+        }
     }
-};
+}
 
 ?>
 
@@ -66,8 +90,12 @@ if (isset($_POST['submit'])) {
                 <input type="email" class="form-control" name="email" id="email" placeholder="Example@gmail.com" required>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="123Example" required>
+                <label for="cpass" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Confirm Password" required>
+            </div>
+            <div class="mb-3">
+                <label for="cpass" class="form-label">Confirm Password</label>
+                <input type="password" name="cpass" class="form-control" id="cpass" placeholder="Confirm Password" required>
             </div>
             <div class="mb-1">
                 <label class="form-label">Role :</label>

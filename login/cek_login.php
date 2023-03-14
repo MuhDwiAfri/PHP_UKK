@@ -14,15 +14,18 @@ if (mysqli_num_rows($user)) {
     if (password_verify($password, $row['password'])) {
         if ($row['role'] == "admin") {
             $_SESSION['username'] = $row['username'];
+            $_SESSION['id'] = $row['id'];
             $_SESSION['role'] = "admin";
             header("location:../admin/menu/menu.php");
         } else if ($row['role'] == "anggota") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "anggota";
+            $_SESSION['id'] = $row['id'];
             header("location:../anggota/menu/menu.php");
         } else if ($row['role'] == "warga") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = "warga";
+            $_SESSION['id'] = $row['id'];
             header("location:../warga/menu/menu.php");
         } else {
             header("location:index.php?pesan=gagal");

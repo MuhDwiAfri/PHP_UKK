@@ -158,7 +158,9 @@ $pengeluaran = mysqli_fetch_assoc($result_pengeluaran);
                                 </div>
                             </div>
                         </div>
-                        <div class="container mb-2 text-white">&nbsp Mingguan : <?= "Rp. " . number_format($pemasukan['total'] - $pengeluaran['total']); ?></div>
+                        <div class="container mb-2 text-white">SISA UANG KESELURUHAN
+                            <!-- <?= "Rp. " . number_format($pemasukan['total'] - $pengeluaran['total']); ?> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-8 mb-4">
