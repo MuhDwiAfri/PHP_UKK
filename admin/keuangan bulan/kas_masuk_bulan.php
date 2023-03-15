@@ -28,29 +28,36 @@ while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
 }
 
-if (isset($_POST['submit'])) {
-    $tanggal_awal = $_POST['tanggal_awal'];
-    $tanggal_akhir = $_POST['tanggal_akhir'];
+// if (isset($_POST['submit'])) {
+//     $tanggal_awal = $_POST['tanggal_awal'];
+//     $tanggal_akhir = $_POST['tanggal_akhir'];
 
-    // buat url cetak
-    $url_cetak = "export_masuk.php?tgl_awal=" . $tanggal_awal . "&tgl_akhir=" . $tanggal_akhir . "&filter=true";
+//     // buat url cetak
+//     $url_cetak = "export_masuk.php?tgl_awal=" . $tanggal_awal . "&tgl_akhir=" . $tanggal_akhir . "&filter=true";
 
-    $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
+//     $koneksi = mysqli_connect('localhost', 'root', '', 'ukk');
 
-    if (!$koneksi) {
-        die('Koneksi gagal: ' . mysqli_connect_error());
-    }
+//     if (!$koneksi) {
+//         die('Koneksi gagal: ' . mysqli_connect_error());
+//     }
 
-    $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
-    $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
+//     $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
+//     $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
 
-    $query = "SELECT *
-          FROM kas_masuk
-          WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
+//     $query = "SELECT *
+//           FROM kas_masuk
+//           WHERE tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'";
 
-    $result = mysqli_query($koneksi, $query);
+//     $result = mysqli_query($koneksi, $query);
 
-    mysqli_close($koneksi);
+//     mysqli_close($koneksi);
+// }
+
+if (isset($_POST['filter'])) {
+    $bulan = $_POST['bulan'];
+    $tahun = $_POST['tahun'];
+
+    $url_cetak = "export_masuk.php?bulan=" . $bulan . "&tahun=" . $tahun;
 }
 
 ?>
@@ -151,7 +158,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="col-12 col-md-7 col-xl-5 ms-auto p-2 bd-highlight">
-                <form method="GET" action="kas_masuk.php" class="d-flex">
+                <form method="GET" action="kas_masuk_bulan.php" class="d-flex">
                     <input type="text" name="cari" id="cari" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>" class="form-control" placeholder="Search">
                     <button type="submit" class="btn btn-primary btn-sm ms-3"><i class="bi bi-search px-2"></i></button>
                 </form>
@@ -165,38 +172,27 @@ if (isset($_POST['submit'])) {
 
                 <span for="bulan" class="input-group-text">Bulan</span>
                 <select name="bulan" id="bulan" class="form-control" style="">
-                    <!-- <option value="01">Januari</option>
-                    <option value="02">Februari</option>
-                    <option value="03">Maret</option>
-                    <option value="04">April</option>
-                    <option value="05">Mei</option>
-                    <option value="06">Juni</option>
-                    <option value="07">Juli</option>
-                    <option value="08">Agustus</option>
-                    <option value="09">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option> -->
-
                     <?php
                     $bulan_sekarang = date('F');
                     $nama_bulan = array(
-                        'January' => 'Januari',
-                        'February' => 'Februari',
-                        'March' => 'Maret',
-                        'April' => 'April',
-                        'May' => 'Mei',
-                        'June' => 'Juni',
-                        'July' => 'Juli',
-                        'August' => 'Agustus',
-                        'September' => 'September',
-                        'October' => 'Oktober',
-                        'November' => 'November',
-                        'December' => 'Desember'
+                        'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
                     );
                     foreach ($nama_bulan as $key => $value) {
-                        $selected = $key == $bulan_sekarang ? 'selected' : '';
-                        echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
+                        $index = $key + 1;
+                        $bulan = $_POST['bulan'] ?? null;
+                        $selected = $index ==  $bulan ? 'selected' : '';
+                        echo '<option value="' . $index . '" ' . $selected . '>' . $value . '</option>';
                     }
                     ?>
                 </select>
@@ -205,12 +201,13 @@ if (isset($_POST['submit'])) {
                     <?php
                     $mulai = date('Y') - 50;
                     for ($i = $mulai; $i < $mulai + 100; $i++) {
-                        $sel = $i == date('Y') ? ' selected="selected"' : '';
+                        $tahun = $_POST['tahun'] ?? date('Y');
+                        $sel = $i == $tahun ? ' selected="selected"' : '';
                         echo '<option value="' . $i . '"' . $sel . '>' . $i . '</option>';
                     }
                     ?>
                 </select>
-                <button class="btn btn-info ms-2" style="color: white;" name="submit" type="submit"><i class="bi bi-funnel"></i></button>
+                <button class="btn btn-info ms-2" style="color: white;" name="filter" type="submit"><i class="bi bi-funnel"></i></button>
             </div>
         </form>
 
@@ -240,22 +237,17 @@ if (isset($_POST['submit'])) {
                     }
                     $no = $posisi + 1;
 
-                    if (isset($_POST['submit'])) {
+                    if (isset($_POST['filter'])) {
 
                         $bulan = $_POST['bulan'];
                         $tahun = $_POST['tahun'];
 
-                        $tanggal_awal = $_POST['tanggal_awal'];
-                        $tanggal_akhir = $_POST['tanggal_akhir'];
-
-                        $format_tanggal_awal = date('Y-m-d', strtotime($tanggal_awal));
-                        $format_tanggal_akhir = date('Y-m-d', strtotime($tanggal_akhir));
-
                         $sql = "select * from kas_masuk WHERE 
+                        MONTH(tanggal_masuk) = $bulan AND YEAR(tanggal_masuk) = $tahun AND 
                         (sumber LIKE '%" . @$cari . "%' OR
                         keterangan LIKE '%" . @$cari . "%' OR
                         jumlah LIKE '%" . @$cari . "%' 
-                        '%" . @$cari . "%') AND tanggal_masuk BETWEEN '$format_tanggal_awal 00:00:00' AND '$format_tanggal_akhir 23:59:59'
+                        '%" . @$cari . "%')
                         order by id_masuk desc limit $posisi,$batas";
                     } else {
                         $sql = "select * from kas_masuk WHERE 
@@ -347,9 +339,9 @@ if (isset($_POST['submit'])) {
                 <?php
                 for ($i = 1; $i <= $jmlhalaman; $i++) {
                     if ($i != $halaman) {
-                        echo "<li class='page-item'><a class='page-link' href='kas_masuk.php?halaman=$i' >$i</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='kas_masuk_bulan.php?halaman=$i' >$i</a></li>";
                     } else {
-                        echo "<li class='page-item active'><a class='page-link' href='kas_masuk.php'>$i</a></li>";
+                        echo "<li class='page-item active'><a class='page-link' href='kas_masuk_bulan.php'>$i</a></li>";
                     }
                 }
                 ?>

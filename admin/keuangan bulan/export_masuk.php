@@ -32,23 +32,20 @@
 
     $pdo = new PDO('mysql:host=' . $host . ';dbname=' . $database, $username, $password);
 
-    $tgl_awal = @$_GET['tgl_awal'];
-    $tgl_akhir = @$_GET['tgl_akhir'];
+    $bulan = $_GET['bulan'] ?? null;
+    $tahun = $_GET['tahun'] ?? null;
 
-    if (empty($tgl_awal) or empty($tgl_akhir)) {
+    if (!$bulan || !$tahun) {
         $query = "SELECT * FROM kas_masuk";
 
         $label = "Semua Data Pemasukan";
     } else {
-        $query = "SELECT * FROM kas_masuk WHERE (tanggal_masuk BETWEEN '" . $tgl_awal . "' AND '" . $tgl_akhir . "')";
-
-        $tgl_awal = date('d-m-Y', strtotime($tgl_awal));
-        $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir));
-        $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
+        $query = "SELECT * FROM kas_masuk WHERE MONTH(tanggal_masuk) = $bulan AND YEAR(tanggal_masuk) = $tahun";
+        $label = "Data yang ada di bulan " . date('m Y', strtotime("01-$bulan-$tahun"));
     }
     ?>
     <h4 style="margin-bottom: 5px;">Data Transaksi</h4>
-    <?php echo $label ?>
+    <p><?= $label ?></p>
 
     <table class="table" border="1" width="100%" style="margin-top: 10px;">
         <tr>

@@ -118,7 +118,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="../keluaran/kas_keluar.php">
+                        <a class="nav-link text-white" href="../keluaran bulan/kas_keluar_bulan.php">
                             <i class="bi bi-wallet2"></i>
                             Pengeluaran Bulanan
                         </a>
